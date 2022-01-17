@@ -38,9 +38,10 @@ jobs:
           git config --local user.name "GitHub Action"
           git commit -am "Update documentation"
           git push
+
 ```
 
-### Action options
+## Action options
 
 - `exampleWorkflowFile`: The example workflow file in `.github/workflows/` Default: `example.yml`.
 
