@@ -22,8 +22,12 @@ describe("buildDocs", () => {
 
       \`\`\`yml
       name: Document Github action
-      on: push
-      # Only run if example.yml, action.yml, or package.json changes
+      on:
+        push:
+          paths:
+            - \\".github/workflows/example.yml\\"
+            - \\"action.yml\\"
+            - \\"package.json\\"
 
       jobs:
         document_action:
@@ -63,8 +67,12 @@ describe("buildDocs", () => {
 
       \`\`\`yml
       name: Document Github action
-      on: push
-      # Only run if example.yml, action.yml, or package.json changes
+      on:
+        push:
+          paths:
+            - \\".github/workflows/example.yml\\"
+            - \\"action.yml\\"
+            - \\"package.json\\"
 
       jobs:
         document_action:
@@ -96,8 +104,12 @@ test("trimExampleWorkflow", () => {
     })
   ).toMatchInlineSnapshot(`
     "name: Document Github action
-    on: push
-    # Only run if example.yml, action.yml, or package.json changes
+    on:
+      push:
+        paths:
+          - \\".github/workflows/example.yml\\"
+          - \\"action.yml\\"
+          - \\"package.json\\"
 
     jobs:
       document_action:
