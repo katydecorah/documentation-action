@@ -1,6 +1,6 @@
 {
   "name": "documentation-action",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A GitHub action to help document your GitHub actions.",
   "main": "dist/index.js",
   "scripts": {
