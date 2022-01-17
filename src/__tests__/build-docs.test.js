@@ -23,7 +23,7 @@ describe("buildDocs", () => {
       To use this action, create a new workflow in \`.github/workflows\` and modify it as needed:
 
       \`\`\`yml
-      name: Document Github action
+      name: Document GitHub action
       on:
         push:
           paths:
@@ -73,7 +73,7 @@ describe("buildDocs", () => {
       To use this action, create a new workflow in \`.github/workflows\` and modify it as needed:
 
       \`\`\`yml
-      name: Document Github action
+      name: Document GitHub action
       on:
         push:
           paths:
@@ -110,7 +110,7 @@ test("trimExampleWorkflow", () => {
       release: "katydecorah/documentation-action@v0.1.0",
     })
   ).toMatchInlineSnapshot(`
-    "name: Document Github action
+    "name: Document GitHub action
     on:
       push:
         paths:
