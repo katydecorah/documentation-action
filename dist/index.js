@@ -5589,7 +5589,7 @@ function writeDocs(doc, documentationFile) {
         // Find and replace generated documentation
         newFile = readme.replace(oldFile[0].toString(), preparedDocs);
         // If there are no changes to documentation, return early.
-        if (oldFile[0].toString() === newFile) {
+        if (oldFile[0].toString() === preparedDocs) {
             (0,lib_core.exportVariable)("UpdateDocumentation", false);
             return;
         }
