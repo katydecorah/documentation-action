@@ -9,6 +9,8 @@ inputs:
   exampleWorkflowFile:
     description: The example workflow file in `.github/workflows/`
     default: example.yml
+    required: false
   documentationFile:
     description: The file where the action will write and update documentation for the action.
     default: README.md
+    required: false

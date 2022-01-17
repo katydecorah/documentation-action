@@ -4,7 +4,11 @@ import { getInput, setFailed } from "@actions/core";
 import { writeDocs } from "./write-docs";
 import { buildDocs } from "./build-docs";
 
-type ActionConfig = {
+/**
+ * As defined by:
+ * https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions
+ */
+export type ActionConfig = {
   name: string;
   author: string;
   description: string;
@@ -13,10 +17,16 @@ type ActionConfig = {
     main: string;
   };
   inputs: {
+    /** A string identifier to associate with the input. */
     [input: string]: {
+      /** A string description of the input parameter. */
       description: string;
+      /** A boolean to indicate whether the action requires the input parameter. */
+      required: boolean;
+      /** A string representing the default value. */
       default?: string;
-      required?: boolean;
+      /** If the input parameter is used, this string is logged as a warning message. */
+      deprecationMessage?: string;
     };
   };
 };
@@ -38,23 +48,6 @@ async function docs() {
   } catch (error) {
     setFailed(error.message);
   }
-}
-
-export function formatInputs(inputs: ActionConfig["inputs"]) {
-  const formattedInputs = Object.keys(inputs)
-    .map(
-      (key) =>
-        `- \`${key}\`: ${inputs[key].required ? "Required. " : ""}${
-          inputs[key].description
-        }${
-          inputs[key].default ? ` Default: \`${inputs[key].default}\`.` : ""
-        }\n`
-    )
-    .join("");
-  return `
-### Action options
-
-${formattedInputs}`;
 }
 
 export default docs();

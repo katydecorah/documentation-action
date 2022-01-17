@@ -1710,8 +1710,7 @@ __nccwpck_require__.r(__webpack_exports__);
 
 // EXPORTS
 __nccwpck_require__.d(__webpack_exports__, {
-  "default": () => (/* binding */ src),
-  "formatInputs": () => (/* binding */ formatInputs)
+  "default": () => (/* binding */ src)
 });
 
 // EXTERNAL MODULE: external "fs"
@@ -5576,7 +5575,7 @@ var lib_core = __nccwpck_require__(186);
 function writeDocs(doc, documentationFile) {
     const readme = (0,external_fs_.readFileSync)(`./${documentationFile}`, "utf-8");
     if (!readme)
-        throw new Error(`Cound not find ${documentationFile}`);
+        throw new Error(`Could not read the documentation file: ${documentationFile}`);
     const comment = {
         start: `<!-- START GENERATED DOCUMENTATION -->`,
         end: `<!-- END GENERATED DOCUMENTATION -->`,
@@ -5602,6 +5601,32 @@ function commentedDocs(comment, doc) {
     return `${comment.start}
 ${doc}
 ${comment.end}`;
+}
+
+;// CONCATENATED MODULE: ./src/format-inputs.ts
+function formatInputs(inputs) {
+    const formattedInputs = Object.keys(inputs)
+        .map((key) => `- \`${key}\`: ${showRequired(inputs[key].required)}${inputs[key].description}${showDefault(inputs[key].default)}\n${showDeprecation(inputs[key].deprecationMessage)}\n`)
+        .join("");
+    return `
+### Action options
+
+${formattedInputs}`;
+}
+function showRequired(value) {
+    if (!value)
+        return "";
+    return "Required. ";
+}
+function showDefault(value) {
+    if (!value)
+        return "";
+    return ` Default: \`${value}\`.`;
+}
+function showDeprecation(value) {
+    if (!value)
+        return "";
+    return ` Deprecation warning: \`${value}\``;
 }
 
 ;// CONCATENATED MODULE: ./src/build-docs.ts
@@ -5647,7 +5672,7 @@ function docs() {
             const documentationFile = (0,lib_core.getInput)("documentationFile");
             const actionConfig = (0,external_fs_.readFileSync)("./action.yml", "utf8");
             const action = load(actionConfig);
-            const { version } = JSON.parse((0,external_fs_.readFileSync)('./package.json', 'utf-8'));
+            const { version } = JSON.parse((0,external_fs_.readFileSync)("./package.json", "utf-8"));
             const release = `${process.env.GITHUB_REPOSITORY}@v${version}`;
             const docs = buildDocs({ exampleWorkflowYaml, action, release });
             writeDocs(docs, documentationFile);
@@ -5656,15 +5681,6 @@ function docs() {
             (0,lib_core.setFailed)(error.message);
         }
     });
-}
-function formatInputs(inputs) {
-    const formattedInputs = Object.keys(inputs)
-        .map((key) => `- \`${key}\`: ${inputs[key].required ? "Required. " : ""}${inputs[key].description}${inputs[key].default ? ` Default: \`${inputs[key].default}\`.` : ""}\n`)
-        .join("");
-    return `
-### Action options
-
-${formattedInputs}`;
 }
 /* harmony default export */ const src = (docs());
 

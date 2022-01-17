@@ -72,4 +72,17 @@ Hello!
       ]
     `);
   });
+
+  test("can't find file", async () => {
+    jest.spyOn(fs, "readFileSync").mockImplementationOnce(() => undefined);
+    try {
+      writeDocs(exampleDocs, "README.md");
+      // Fail test if above expression doesn't throw anything.
+      expect(true).toBe(false);
+    } catch (e) {
+      expect(e.message).toBe(
+        "Could not read the documentation file: README.md"
+      );
+    }
+  });
 });

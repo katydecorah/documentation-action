@@ -1,5 +1,4 @@
-import { formatInputs } from "./index";
-import { readFileSync } from "fs";
+import { formatInputs } from "./format-inputs";
 
 export function buildDocs({ exampleWorkflowYaml, action, release }) {
   let docs = `

@@ -2,7 +2,10 @@ import { readFileSync, writeFileSync } from "fs";
 
 export function writeDocs(doc: string, documentationFile: string) {
   const readme = readFileSync(`./${documentationFile}`, "utf-8");
-  if (!readme) throw new Error(`Cound not find ${documentationFile}`);
+  if (!readme)
+    throw new Error(
+      `Could not read the documentation file: ${documentationFile}`
+    );
   const comment = {
     start: `<!-- START GENERATED DOCUMENTATION -->`,
     end: `<!-- END GENERATED DOCUMENTATION -->`,
