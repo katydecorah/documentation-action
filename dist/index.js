@@ -5598,7 +5598,8 @@ ${preparedDocs}
     (0,external_fs_.writeFileSync)(`./${documentationFile}`, newFile);
 }
 function commentedDocs(comment, doc) {
-    return `${comment.start}${doc}${comment.end}`;
+    return `${comment.start}
+${doc}${comment.end}`;
 }
 
 ;// CONCATENATED MODULE: ./src/format-inputs.ts
@@ -5606,10 +5607,7 @@ function formatInputs(inputs) {
     const formattedInputs = Object.keys(inputs)
         .map((key) => `- \`${key}\`: ${showRequired(inputs[key].required)}${inputs[key].description}${showDefault(inputs[key].default)}\n${showDeprecation(inputs[key].deprecationMessage)}\n`)
         .join("");
-    return `
-### Action options
-
-${formattedInputs}`;
+    return formattedInputs;
 }
 function showRequired(value) {
     if (!value)
@@ -5640,7 +5638,11 @@ ${trimExampleWorkflow({ exampleWorkflowYaml, release })}
 \`\`\``;
     // Document inputs, if they exist
     if ("inputs" in action) {
-        docs += formatInputs(action.inputs);
+        docs += `
+
+## Action options
+
+${formatInputs(action.inputs)}`;
     }
     return docs;
 }

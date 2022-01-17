@@ -35,6 +35,7 @@ Hello!
       A GitHub action to help document your GitHub actions. 
 
       <!-- START GENERATED DOCUMENTATION -->
+
       ## Set up the workflow
 
       \`\`\`yml
@@ -58,6 +59,7 @@ Hello!
       A GitHub action to help document your GitHub actions. 
 
       <!-- START GENERATED DOCUMENTATION -->
+
       ## Set up the workflow
 
       \`\`\`yml

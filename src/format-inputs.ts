@@ -11,10 +11,7 @@ export function formatInputs(inputs: ActionConfig["inputs"]) {
         )}\n`
     )
     .join("");
-  return `
-### Action options
-
-${formattedInputs}`;
+  return formattedInputs;
 }
 
 function showRequired(value: boolean | undefined) {

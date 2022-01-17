@@ -7,10 +7,7 @@ const action = load(readFileSync("./action.yml", "utf-8"));
 describe("formatInputs", () => {
   test("generated from action.yml", () => {
     expect(formatInputs(action.inputs)).toMatchInlineSnapshot(`
-      "
-      ### Action options
-
-      - \`exampleWorkflowFile\`: The example workflow file in \`.github/workflows/\` Default: \`example.yml\`.
+      "- \`exampleWorkflowFile\`: The example workflow file in \`.github/workflows/\` Default: \`example.yml\`.
 
       - \`documentationFile\`: The file where the action will write and update documentation for the action. Default: \`README.md\`.
 
@@ -34,10 +31,7 @@ describe("formatInputs", () => {
         },
       })
     ).toMatchInlineSnapshot(`
-      "
-      ### Action options
-
-      - \`documentationFile\`: Required. The file where the action will write and update documentation for the action.
+      "- \`documentationFile\`: Required. The file where the action will write and update documentation for the action.
 
       - \`docFile\`: The file where the action will write and update documentation for the action.
        Deprecation warning: \`This input is now deprecated, use \`docFile\` instead.\`

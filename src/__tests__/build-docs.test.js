@@ -49,7 +49,8 @@ describe("buildDocs", () => {
                 git push
 
       \`\`\`
-      ### Action options
+
+      ## Action options
 
       - \`exampleWorkflowFile\`: The example workflow file in \`.github/workflows/\` Default: \`example.yml\`.
 

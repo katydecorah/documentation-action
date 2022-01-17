@@ -11,7 +11,11 @@ ${trimExampleWorkflow({ exampleWorkflowYaml, release })}
 \`\`\``;
   // Document inputs, if they exist
   if ("inputs" in action) {
-    docs += formatInputs(action.inputs);
+    docs += `
+
+## Action options
+
+${formatInputs(action.inputs)}`;
   }
   return docs;
 }

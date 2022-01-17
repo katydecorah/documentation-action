@@ -28,5 +28,6 @@ ${preparedDocs}
 }
 
 function commentedDocs(comment: { start: string; end: string }, doc: string) {
-  return `${comment.start}${doc}${comment.end}`;
+  return `${comment.start}
+${doc}${comment.end}`;
 }
