@@ -14,7 +14,7 @@ To use this action, create two workflow files:
 To use this action, create a new workflow in `.github/workflows` and modify it as needed:
 
 ```yml
-name: Document Github action
+name: Document GitHub action
 on:
   push:
     paths:
