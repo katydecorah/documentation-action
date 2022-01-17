@@ -11,6 +11,8 @@ To use this action, create two workflow files:
 
 ## Set up the workflow
 
+To use this action, create a new workflow in `.github/workflows` and modify it as needed:
+
 ```yml
 name: Document Github action
 on:
@@ -35,6 +37,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git commit -am "Update documentation"
           git push
+
 ```
 
 ### Action options
@@ -42,5 +45,6 @@ jobs:
 - `exampleWorkflowFile`: The example workflow file in `.github/workflows/` Default: `example.yml`.
 
 - `documentationFile`: The file where the action will write and update documentation for the action. Default: `README.md`.
+
 
 <!-- END GENERATED DOCUMENTATION -->
