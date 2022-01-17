@@ -34,6 +34,8 @@ describe("buildDocs", () => {
           steps:
             - name: Checkout
               uses: actions/checkout@v2
+              with:
+                ref: \${{ github.event.pull_request.head.ref }}
             - name: Documentation action
               uses: katydecorah/documentation-action@v0.1.0
             - name: Commit files
@@ -77,6 +79,8 @@ describe("buildDocs", () => {
           steps:
             - name: Checkout
               uses: actions/checkout@v2
+              with:
+                ref: \${{ github.event.pull_request.head.ref }}
             - name: Documentation action
               uses: katydecorah/documentation-action@v0.1.0
             - name: Commit files
@@ -112,6 +116,8 @@ test("trimExampleWorkflow", () => {
         steps:
           - name: Checkout
             uses: actions/checkout@v2
+            with:
+              ref: \${{ github.event.pull_request.head.ref }}
           - name: Documentation action
             uses: katydecorah/documentation-action@v0.1.0
           - name: Commit files
