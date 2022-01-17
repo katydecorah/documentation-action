@@ -40,8 +40,8 @@ describe("buildDocs", () => {
               run: |
                 git config --local user.email \\"action@github.com\\"
                 git config --local user.name \\"GitHub Action\\"
-                git add -A && git commit -m \\"Updated README.md\\"
-                git push \\"https://\${GITHUB_ACTOR}:\${{secrets.GITHUB_TOKEN}}@github.com/\${GITHUB_REPOSITORY}.git\\"
+                git commit -am \\"Updated README.md\\"
+                git push
 
       \`\`\`
 
@@ -83,8 +83,8 @@ describe("buildDocs", () => {
               run: |
                 git config --local user.email \\"action@github.com\\"
                 git config --local user.name \\"GitHub Action\\"
-                git add -A && git commit -m \\"Updated README.md\\"
-                git push \\"https://\${GITHUB_ACTOR}:\${{secrets.GITHUB_TOKEN}}@github.com/\${GITHUB_REPOSITORY}.git\\"
+                git commit -am \\"Updated README.md\\"
+                git push
 
       \`\`\`
       "
@@ -118,8 +118,8 @@ test("trimExampleWorkflow", () => {
             run: |
               git config --local user.email \\"action@github.com\\"
               git config --local user.name \\"GitHub Action\\"
-              git add -A && git commit -m \\"Updated README.md\\"
-              git push \\"https://\${GITHUB_ACTOR}:\${{secrets.GITHUB_TOKEN}}@github.com/\${GITHUB_REPOSITORY}.git\\"
+              git commit -am \\"Updated README.md\\"
+              git push
     "
   `);
 });
