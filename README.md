@@ -4,7 +4,7 @@ A GitHub action to help document your GitHub actions.
 
 To use this action, create two workflow files:
 
-1. `.github/workflows/example.yml` - in this file, create an example action to run your action.
+1. `.github/workflows/example.yml` - in this file, create an example action to show developers how to use it.
 2. `.github/workflows/documentation.yml` - this will hold the action documented below. Follow the steps below to set up the documetnation action:
 
 <!-- START GENERATED DOCUMENTATION -->
