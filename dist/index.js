@@ -5598,9 +5598,7 @@ ${preparedDocs}
     (0,external_fs_.writeFileSync)(`./${documentationFile}`, newFile);
 }
 function commentedDocs(comment, doc) {
-    return `${comment.start}
-${doc}
-${comment.end}`;
+    return `${comment.start}${doc}${comment.end}`;
 }
 
 ;// CONCATENATED MODULE: ./src/format-inputs.ts
@@ -5639,8 +5637,7 @@ To use this action, create a new workflow in \`.github/workflows\` and modify it
 
 \`\`\`yml
 ${trimExampleWorkflow({ exampleWorkflowYaml, release })}
-\`\`\`
-`;
+\`\`\``;
     // Document inputs, if they exist
     if ("inputs" in action) {
         docs += formatInputs(action.inputs);
