@@ -1,3 +1,4 @@
+import { exportVariable } from "@actions/core";
 import { readFileSync, writeFileSync } from "fs";
 
 export function writeDocs(doc: string, documentationFile: string) {
@@ -17,6 +18,11 @@ export function writeDocs(doc: string, documentationFile: string) {
   if (oldFile) {
     // Find and replace generated documentation
     newFile = readme.replace(oldFile[0].toString(), preparedDocs);
+    // If there are no changes to documentation, return early.
+    if (oldFile[0].toString() === newFile) {
+      exportVariable("UpdateDocumentation", false);
+      return;
+    }
   } else {
     // If we can't find the comments, then append documentation to the bottom of the page.
     newFile = `${readme}
@@ -24,6 +30,7 @@ export function writeDocs(doc: string, documentationFile: string) {
 ${preparedDocs}
 `;
   }
+  exportVariable("UpdateDocumentation", true);
   writeFileSync(`./${documentationFile}`, newFile);
 }
 

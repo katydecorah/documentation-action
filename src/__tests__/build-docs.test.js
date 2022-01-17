@@ -42,6 +42,7 @@ describe("buildDocs", () => {
             - name: Documentation action
               uses: katydecorah/documentation-action@v0.1.0
             - name: Commit files
+              if: env.UpdateDocumentation == true
               run: |
                 git config --local user.email \\"action@github.com\\"
                 git config --local user.name \\"GitHub Action\\"
@@ -91,6 +92,7 @@ describe("buildDocs", () => {
             - name: Documentation action
               uses: katydecorah/documentation-action@v0.1.0
             - name: Commit files
+              if: env.UpdateDocumentation == true
               run: |
                 git config --local user.email \\"action@github.com\\"
                 git config --local user.name \\"GitHub Action\\"
@@ -127,6 +129,7 @@ test("trimExampleWorkflow", () => {
           - name: Documentation action
             uses: katydecorah/documentation-action@v0.1.0
           - name: Commit files
+            if: env.UpdateDocumentation == true
             run: |
               git config --local user.email \\"action@github.com\\"
               git config --local user.name \\"GitHub Action\\"
