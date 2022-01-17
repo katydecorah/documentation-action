@@ -31,7 +31,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Documentation action
-        uses: katydecorah/documentation-action@v0.0.6
+        uses: katydecorah/documentation-action@v0.1.0
       - name: Commit files
         if: env.UpdateDocumentation == 'true'
         run: |
