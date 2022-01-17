@@ -2,11 +2,10 @@
 
 A GitHub action to help document your GitHub actions.
 
-To use this action, create two workflow files in `.github/workflows/`:
+To use this action, create two workflow files:
 
-1. `documentation.yml` - this will hold the action documented below.
-2. `example.yml` - this will hold a sample action to run your action.
-
+1. `.github/workflows/example.yml` - this will hold a sample action to run your action.
+2. `.github/workflows/documentation.yml` - this will hold the action documented below. Follow the steps below to set up the documetnation action:
 
 <!-- START GENERATED DOCUMENTATION -->
 
@@ -36,7 +35,6 @@ jobs:
           git config --local user.name "GitHub Action"
           git commit -am "Update documentation"
           git push
-
 ```
 
 ### Action options
@@ -44,6 +42,5 @@ jobs:
 - `exampleWorkflowFile`: The example workflow file in `.github/workflows/` Default: `example.yml`.
 
 - `documentationFile`: The file where the action will write and update documentation for the action. Default: `README.md`.
-
 
 <!-- END GENERATED DOCUMENTATION -->

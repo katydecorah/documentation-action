@@ -20,6 +20,8 @@ describe("buildDocs", () => {
       "
       ## Set up the workflow
 
+      To use this action, create a new workflow in \`.github/workflows\` and modify it as needed:
+
       \`\`\`yml
       name: Document Github action
       on:
@@ -66,6 +68,8 @@ describe("buildDocs", () => {
     ).toMatchInlineSnapshot(`
       "
       ## Set up the workflow
+
+      To use this action, create a new workflow in \`.github/workflows\` and modify it as needed:
 
       \`\`\`yml
       name: Document Github action
