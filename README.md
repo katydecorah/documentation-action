@@ -8,7 +8,6 @@ To use this action, create two workflow files:
 2. `.github/workflows/documentation.yml` - this will hold the action documented below. Follow the steps below to set up the documetnation action:
 
 <!-- START GENERATED DOCUMENTATION -->
-
 ## Set up the workflow
 
 To use this action, create a new workflow in `.github/workflows` and modify it as needed:
@@ -21,6 +20,7 @@ on:
       - ".github/workflows/example.yml"
       - "action.yml"
       - "package.json"
+      - "README.md"
 
 jobs:
   document_action:
@@ -37,8 +37,8 @@ jobs:
           git config --local user.name "GitHub Action"
           git commit -am "Update documentation"
           git push
-```
 
+```
 ### Action options
 
 - `exampleWorkflowFile`: The example workflow file in `.github/workflows/` Default: `example.yml`.
