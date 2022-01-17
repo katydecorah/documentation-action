@@ -1,0 +1,14 @@
+name: GitHub Action Documentation
+author: "@katydecorah"
+description: "A GitHub action to help document your GitHub action."
+runs:
+  using: "node16"
+  main: dist/index.js
+
+inputs:
+  exampleWorkflowFile:
+    description: The example workflow file in `.github/workflows/`
+    default: example.yml
+  documentationFile:
+    description: The file where the action will write and update documentation for the action.
+    default: README.md
