@@ -33,6 +33,7 @@ jobs:
       - name: Documentation action
         uses: katydecorah/documentation-action@v0.0.6
       - name: Commit files
+        if: env.UpdateDocumentation == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
