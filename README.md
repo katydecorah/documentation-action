@@ -34,7 +34,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git commit -am "Updated README.md"
+          git commit -am "Update documentation"
           git push
 
 ```
@@ -42,6 +42,8 @@ jobs:
 ### Action options
 
 - `exampleWorkflowFile`: The example workflow file in `.github/workflows/` Default: `example.yml`.
+
 - `documentationFile`: The file where the action will write and update documentation for the action. Default: `README.md`.
+
 
 <!-- END GENERATED DOCUMENTATION -->
