@@ -1,7 +1,6 @@
 import { readFileSync } from "fs";
 import { load } from "js-yaml";
 import { getInput, setFailed } from "@actions/core";
-import * as github from "@actions/github";
 import { writeDocs } from "./write-docs";
 import { buildDocs } from "./build-docs";
 
@@ -32,7 +31,8 @@ async function docs() {
     const documentationFile: string = getInput("documentationFile");
     const actionConfig: string = readFileSync("./action.yml", "utf8");
     const action = load(actionConfig) as ActionConfig;
-    const release = `${process.env.GITHUB_REPOSITORY}@v${process.env.GITHUB_REF_NAME}`;
+    const { version } = JSON.parse(readFileSync("./package.json", "utf-8"));
+    const release = `${process.env.GITHUB_REPOSITORY}@v${version}`;
     const docs = buildDocs({ exampleWorkflowYaml, action, release });
     writeDocs(docs, documentationFile);
   } catch (error) {

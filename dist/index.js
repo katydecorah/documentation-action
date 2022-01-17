@@ -5647,7 +5647,8 @@ function docs() {
             const documentationFile = (0,lib_core.getInput)("documentationFile");
             const actionConfig = (0,external_fs_.readFileSync)("./action.yml", "utf8");
             const action = load(actionConfig);
-            const release = `${process.env.GITHUB_REPOSITORY}@v${process.env.GITHUB_REF_NAME}`;
+            const { version } = JSON.parse((0,external_fs_.readFileSync)('./package.json', 'utf-8'));
+            const release = `${process.env.GITHUB_REPOSITORY}@v${version}`;
             const docs = buildDocs({ exampleWorkflowYaml, action, release });
             writeDocs(docs, documentationFile);
         }

@@ -22,10 +22,8 @@ describe("buildDocs", () => {
 
       \`\`\`yml
       name: Document Github action
-      on:
-        push:
-          tags:
-            - \\"v*.*.*\\"
+      on: push
+      # Only run if example.yml, action.yml, or package.json changes
 
       jobs:
         document_action:
@@ -34,8 +32,6 @@ describe("buildDocs", () => {
           steps:
             - name: Checkout
               uses: actions/checkout@v2
-              with:
-                ref: \${{ github.event.pull_request.head.ref }}
             - name: Documentation action
               uses: katydecorah/documentation-action@v0.1.0
             - name: Commit files
@@ -67,10 +63,8 @@ describe("buildDocs", () => {
 
       \`\`\`yml
       name: Document Github action
-      on:
-        push:
-          tags:
-            - \\"v*.*.*\\"
+      on: push
+      # Only run if example.yml, action.yml, or package.json changes
 
       jobs:
         document_action:
@@ -79,8 +73,6 @@ describe("buildDocs", () => {
           steps:
             - name: Checkout
               uses: actions/checkout@v2
-              with:
-                ref: \${{ github.event.pull_request.head.ref }}
             - name: Documentation action
               uses: katydecorah/documentation-action@v0.1.0
             - name: Commit files
@@ -104,10 +96,8 @@ test("trimExampleWorkflow", () => {
     })
   ).toMatchInlineSnapshot(`
     "name: Document Github action
-    on:
-      push:
-        tags:
-          - \\"v*.*.*\\"
+    on: push
+    # Only run if example.yml, action.yml, or package.json changes
 
     jobs:
       document_action:
@@ -116,8 +106,6 @@ test("trimExampleWorkflow", () => {
         steps:
           - name: Checkout
             uses: actions/checkout@v2
-            with:
-              ref: \${{ github.event.pull_request.head.ref }}
           - name: Documentation action
             uses: katydecorah/documentation-action@v0.1.0
           - name: Commit files
