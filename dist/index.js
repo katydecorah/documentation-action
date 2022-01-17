@@ -5572,6 +5572,7 @@ var jsYaml = {
 var lib_core = __nccwpck_require__(186);
 ;// CONCATENATED MODULE: ./src/write-docs.ts
 
+
 function writeDocs(doc, documentationFile) {
     const readme = (0,external_fs_.readFileSync)(`./${documentationFile}`, "utf-8");
     if (!readme)
@@ -5587,6 +5588,11 @@ function writeDocs(doc, documentationFile) {
     if (oldFile) {
         // Find and replace generated documentation
         newFile = readme.replace(oldFile[0].toString(), preparedDocs);
+        // If there are no changes to documentation, return early.
+        if (oldFile[0].toString() === newFile) {
+            (0,lib_core.exportVariable)("UpdateDocumentation", false);
+            return;
+        }
     }
     else {
         // If we can't find the comments, then append documentation to the bottom of the page.
@@ -5595,6 +5601,7 @@ function writeDocs(doc, documentationFile) {
 ${preparedDocs}
 `;
     }
+    (0,lib_core.exportVariable)("UpdateDocumentation", true);
     (0,external_fs_.writeFileSync)(`./${documentationFile}`, newFile);
 }
 function commentedDocs(comment, doc) {
