@@ -15,6 +15,7 @@ To use this action, create two workflow files in `.github/workflows/`:
 ```yml
 name: Document Github action
 on: push
+# Only run if example.yml, action.yml, or package.json changes
 
 jobs:
   document_action:
@@ -24,13 +25,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Documentation action
-        uses: [object Object]@vrefs/heads/main
+        uses: katydecorah/documentation-action@v0.0.6
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -A && git commit -m "Updated README.md"
-          git push "https://${GITHUB_ACTOR}:${{secrets.GITHUB_TOKEN}}@github.com/${GITHUB_REPOSITORY}.git" HEAD:${GITHUB_REF}
+          git commit -am "Updated README.md"
+          git push
 
 ```
 
