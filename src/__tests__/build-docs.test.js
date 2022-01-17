@@ -22,10 +22,10 @@ describe("buildDocs", () => {
 
       \`\`\`yml
       name: Document Github action
-      on: 
+      on:
         push:
           tags:
-            - 'v*.*.*'
+            - \\"v*.*.*\\"
 
       jobs:
         document_action:
@@ -41,7 +41,7 @@ describe("buildDocs", () => {
                 git config --local user.email \\"action@github.com\\"
                 git config --local user.name \\"GitHub Action\\"
                 git add -A && git commit -m \\"Updated README.md\\"
-                git push \\"https://\${GITHUB_ACTOR}:\${{secrets.GITHUB_TOKEN}}@github.com/\${GITHUB_REPOSITORY}.git\\" HEAD:\${GITHUB_REF}
+                git push \\"https://\${GITHUB_ACTOR}:\${{secrets.GITHUB_TOKEN}}@github.com/\${GITHUB_REPOSITORY}.git\\"
 
       \`\`\`
 
@@ -65,10 +65,10 @@ describe("buildDocs", () => {
 
       \`\`\`yml
       name: Document Github action
-      on: 
+      on:
         push:
           tags:
-            - 'v*.*.*'
+            - \\"v*.*.*\\"
 
       jobs:
         document_action:
@@ -84,7 +84,7 @@ describe("buildDocs", () => {
                 git config --local user.email \\"action@github.com\\"
                 git config --local user.name \\"GitHub Action\\"
                 git add -A && git commit -m \\"Updated README.md\\"
-                git push \\"https://\${GITHUB_ACTOR}:\${{secrets.GITHUB_TOKEN}}@github.com/\${GITHUB_REPOSITORY}.git\\" HEAD:\${GITHUB_REF}
+                git push \\"https://\${GITHUB_ACTOR}:\${{secrets.GITHUB_TOKEN}}@github.com/\${GITHUB_REPOSITORY}.git\\"
 
       \`\`\`
       "
@@ -100,10 +100,10 @@ test("trimExampleWorkflow", () => {
     })
   ).toMatchInlineSnapshot(`
     "name: Document Github action
-    on: 
+    on:
       push:
         tags:
-          - 'v*.*.*'
+          - \\"v*.*.*\\"
 
     jobs:
       document_action:
@@ -119,7 +119,7 @@ test("trimExampleWorkflow", () => {
               git config --local user.email \\"action@github.com\\"
               git config --local user.name \\"GitHub Action\\"
               git add -A && git commit -m \\"Updated README.md\\"
-              git push \\"https://\${GITHUB_ACTOR}:\${{secrets.GITHUB_TOKEN}}@github.com/\${GITHUB_REPOSITORY}.git\\" HEAD:\${GITHUB_REF}
+              git push \\"https://\${GITHUB_ACTOR}:\${{secrets.GITHUB_TOKEN}}@github.com/\${GITHUB_REPOSITORY}.git\\"
     "
   `);
 });
