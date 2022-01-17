@@ -42,7 +42,7 @@ describe("buildDocs", () => {
               run: |
                 git config --local user.email \\"action@github.com\\"
                 git config --local user.name \\"GitHub Action\\"
-                git commit -am \\"Updated README.md\\"
+                git commit -am \\"Update documentation\\"
                 git push
 
       \`\`\`
@@ -87,7 +87,7 @@ describe("buildDocs", () => {
               run: |
                 git config --local user.email \\"action@github.com\\"
                 git config --local user.name \\"GitHub Action\\"
-                git commit -am \\"Updated README.md\\"
+                git commit -am \\"Update documentation\\"
                 git push
 
       \`\`\`
@@ -124,7 +124,7 @@ test("trimExampleWorkflow", () => {
             run: |
               git config --local user.email \\"action@github.com\\"
               git config --local user.name \\"GitHub Action\\"
-              git commit -am \\"Updated README.md\\"
+              git commit -am \\"Update documentation\\"
               git push
     "
   `);
