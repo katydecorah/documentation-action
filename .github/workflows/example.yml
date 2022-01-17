@@ -5,6 +5,7 @@ on:
       - ".github/workflows/example.yml"
       - "action.yml"
       - "package.json"
+      - "README.md"
 
 jobs:
   document_action:

@@ -30,6 +30,7 @@ describe("buildDocs", () => {
             - \\".github/workflows/example.yml\\"
             - \\"action.yml\\"
             - \\"package.json\\"
+            - \\"README.md\\"
 
       jobs:
         document_action:
@@ -78,6 +79,7 @@ describe("buildDocs", () => {
             - \\".github/workflows/example.yml\\"
             - \\"action.yml\\"
             - \\"package.json\\"
+            - \\"README.md\\"
 
       jobs:
         document_action:
@@ -114,6 +116,7 @@ test("trimExampleWorkflow", () => {
           - \\".github/workflows/example.yml\\"
           - \\"action.yml\\"
           - \\"package.json\\"
+          - \\"README.md\\"
 
     jobs:
       document_action:
