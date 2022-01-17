@@ -38,7 +38,6 @@ jobs:
           git config --local user.name "GitHub Action"
           git commit -am "Update documentation"
           git push
-
 ```
 
 ## Action options

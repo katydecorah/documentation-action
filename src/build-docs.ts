@@ -21,5 +21,5 @@ ${formatInputs(action.inputs)}`;
 }
 
 export function trimExampleWorkflow({ exampleWorkflowYaml, release }) {
-  return exampleWorkflowYaml.replace("uses: ./", `uses: ${release}`);
+  return exampleWorkflowYaml.replace("uses: ./", `uses: ${release}`).trim();
 }

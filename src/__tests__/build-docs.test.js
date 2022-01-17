@@ -47,7 +47,6 @@ describe("buildDocs", () => {
                 git config --local user.name \\"GitHub Action\\"
                 git commit -am \\"Update documentation\\"
                 git push
-
       \`\`\`
 
       ## Action options
@@ -97,7 +96,6 @@ describe("buildDocs", () => {
                 git config --local user.name \\"GitHub Action\\"
                 git commit -am \\"Update documentation\\"
                 git push
-
       \`\`\`"
     `);
   });
@@ -133,7 +131,6 @@ test("trimExampleWorkflow", () => {
               git config --local user.email \\"action@github.com\\"
               git config --local user.name \\"GitHub Action\\"
               git commit -am \\"Update documentation\\"
-              git push
-    "
+              git push"
   `);
 });

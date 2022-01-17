@@ -5647,7 +5647,7 @@ ${formatInputs(action.inputs)}`;
     return docs;
 }
 function trimExampleWorkflow({ exampleWorkflowYaml, release }) {
-    return exampleWorkflowYaml.replace("uses: ./", `uses: ${release}`);
+    return exampleWorkflowYaml.replace("uses: ./", `uses: ${release}`).trim();
 }
 
 ;// CONCATENATED MODULE: ./src/index.ts
