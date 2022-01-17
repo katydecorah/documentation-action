@@ -22,7 +22,10 @@ describe("buildDocs", () => {
 
       \`\`\`yml
       name: Document Github action
-      on: release
+      on: 
+        push:
+          tags:
+            - 'v*.*.*'
 
       jobs:
         document_action:
@@ -62,7 +65,10 @@ describe("buildDocs", () => {
 
       \`\`\`yml
       name: Document Github action
-      on: release
+      on: 
+        push:
+          tags:
+            - 'v*.*.*'
 
       jobs:
         document_action:
@@ -94,7 +100,10 @@ test("trimExampleWorkflow", () => {
     })
   ).toMatchInlineSnapshot(`
     "name: Document Github action
-    on: release
+    on: 
+      push:
+        tags:
+          - 'v*.*.*'
 
     jobs:
       document_action:

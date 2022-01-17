@@ -32,7 +32,7 @@ async function docs() {
     const documentationFile: string = getInput("documentationFile");
     const actionConfig: string = readFileSync("./action.yml", "utf8");
     const action = load(actionConfig) as ActionConfig;
-    const release = `${github.context.repo}@v${process.env.GITHUB_REF}`;
+    const release = `${process.env.GITHUB_REPOSITORY}@v${process.env.GITHUB_REF_NAME}`;
     const docs = buildDocs({ exampleWorkflowYaml, action, release });
     writeDocs(docs, documentationFile);
   } catch (error) {

@@ -1,5 +1,8 @@
 name: Document Github action
-on: push
+on:
+  push:
+    tags:
+      - "v*.*.*"
 
 jobs:
   document_action:
