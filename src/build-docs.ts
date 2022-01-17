@@ -8,8 +8,7 @@ To use this action, create a new workflow in \`.github/workflows\` and modify it
 
 \`\`\`yml
 ${trimExampleWorkflow({ exampleWorkflowYaml, release })}
-\`\`\`
-`;
+\`\`\``;
   // Document inputs, if they exist
   if ("inputs" in action) {
     docs += formatInputs(action.inputs);

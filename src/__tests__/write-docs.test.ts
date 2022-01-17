@@ -35,14 +35,12 @@ Hello!
       A GitHub action to help document your GitHub actions. 
 
       <!-- START GENERATED DOCUMENTATION -->
-
       ## Set up the workflow
 
       \`\`\`yml
       name: Document Github action
       on: release
       \`\`\`
-
       <!-- END GENERATED DOCUMENTATION -->",
       ]
     `);
@@ -60,14 +58,12 @@ Hello!
       A GitHub action to help document your GitHub actions. 
 
       <!-- START GENERATED DOCUMENTATION -->
-
       ## Set up the workflow
 
       \`\`\`yml
       name: Document Github action
       on: release
       \`\`\`
-
       <!-- END GENERATED DOCUMENTATION -->",
       ]
     `);

@@ -48,7 +48,6 @@ describe("buildDocs", () => {
                 git push
 
       \`\`\`
-
       ### Action options
 
       - \`exampleWorkflowFile\`: The example workflow file in \`.github/workflows/\` Default: \`example.yml\`.
@@ -96,8 +95,7 @@ describe("buildDocs", () => {
                 git commit -am \\"Update documentation\\"
                 git push
 
-      \`\`\`
-      "
+      \`\`\`"
     `);
   });
 });
