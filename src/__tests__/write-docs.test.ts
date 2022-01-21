@@ -1,8 +1,8 @@
 import { writeDocs } from "../write-docs";
-import fs from "fs";
+import { promises } from "fs";
 import { exportVariable, setFailed } from "@actions/core";
+import * as core from "@actions/core";
 
-jest.mock("fs");
 jest.mock("@actions/core");
 
 const exampleReadMe = `# documentation-action
@@ -17,18 +17,21 @@ on: release
 \`\`\`
 `;
 
+beforeEach(() => {
+  jest.spyOn(core, "getInput").mockImplementation(() => "README.md");
+});
+
 describe("writeDocs", () => {
   test("with comments", async () => {
-    jest.spyOn(fs, "readFileSync").mockImplementationOnce(
-      () =>
-        `${exampleReadMe} 
+    jest.spyOn(promises, "readFile").mockImplementationOnce(
+      async () => `${exampleReadMe} 
 
 <!-- START GENERATED DOCUMENTATION --> 
 Hello! 
 <!-- END GENERATED DOCUMENTATION -->`
     );
-    const writeMock = jest.spyOn(fs, "writeFileSync");
-    writeDocs(exampleDocs, "README.md");
+    const writeMock = jest.spyOn(promises, "writeFile").mockImplementation();
+    await writeDocs(exampleDocs);
     expect(writeMock.mock.calls[0]).toMatchInlineSnapshot(`
       Array [
         "./README.md",
@@ -51,9 +54,11 @@ Hello!
   });
 
   test("without comments", async () => {
-    jest.spyOn(fs, "readFileSync").mockImplementationOnce(() => exampleReadMe);
-    const writeMock = jest.spyOn(fs, "writeFileSync");
-    writeDocs(exampleDocs, "README.md");
+    jest
+      .spyOn(promises, "readFile")
+      .mockImplementationOnce(async () => exampleReadMe);
+    const writeMock = jest.spyOn(promises, "writeFile").mockImplementation();
+    await writeDocs(exampleDocs);
     expect(writeMock.mock.calls[0]).toMatchInlineSnapshot(`
       Array [
         "./README.md",
@@ -77,21 +82,21 @@ Hello!
   });
 
   test("no changes", async () => {
-    jest.spyOn(fs, "readFileSync").mockImplementationOnce(
-      () => `# documentation-action
+    jest.spyOn(promises, "readFile").mockImplementationOnce(
+      async () => `# documentation-action
 A GitHub action to help document your GitHub actions.
 <!-- START GENERATED DOCUMENTATION -->
 ## Set up the workflow<!-- END GENERATED DOCUMENTATION -->`
     );
-    const writeMock = jest.spyOn(fs, "writeFileSync");
-    writeDocs(`## Set up the workflow`, "README.md");
+    const writeMock = jest.spyOn(promises, "writeFile").mockImplementation();
+    await writeDocs(`## Set up the workflow`);
     expect(writeMock).not.toHaveBeenCalled();
     expect(exportVariable).toHaveBeenCalledWith("UpdateDocumentation", false);
   });
 
   test("can't find file", async () => {
-    jest.spyOn(fs, "readFileSync").mockImplementationOnce(() => undefined);
-    writeDocs(exampleDocs, "README.md");
+    jest.spyOn(promises, "readFile").mockImplementationOnce(() => undefined);
+    await writeDocs(exampleDocs);
     expect(setFailed).toHaveBeenCalledWith(
       "Could not read the documentation file: README.md"
     );

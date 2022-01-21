@@ -1,8 +1,9 @@
-import { exportVariable, setFailed } from "@actions/core";
-import { readFileSync, writeFileSync } from "fs";
+import { exportVariable, setFailed, getInput } from "@actions/core";
+import { readFile, writeFile } from "fs/promises";
 
-export function writeDocs(doc: string, documentationFile: string) {
-  const readme = readFileSync(`./${documentationFile}`, "utf-8");
+export async function writeDocs(doc: string) {
+  const documentationFile: string = getInput("documentationFile");
+  const readme = await readFile(`./${documentationFile}`, "utf-8");
   if (!readme) {
     setFailed(`Could not read the documentation file: ${documentationFile}`);
     return;
@@ -32,7 +33,7 @@ ${preparedDocs}
 `;
   }
   exportVariable("UpdateDocumentation", true);
-  writeFileSync(`./${documentationFile}`, newFile);
+  await writeFile(`./${documentationFile}`, newFile);
 }
 
 function commentedDocs(comment: { start: string; end: string }, doc: string) {

@@ -1,5 +1,5 @@
 import { formatInputs } from "./format-inputs";
-import { ActionConfig } from "./index";
+import { ActionConfig } from "./action";
 
 export function buildDocs({
   exampleWorkflowYaml,
