@@ -1,12 +1,13 @@
-import { exportVariable } from "@actions/core";
+import { exportVariable, setFailed } from "@actions/core";
 import { readFileSync, writeFileSync } from "fs";
 
 export function writeDocs(doc: string, documentationFile: string) {
   const readme = readFileSync(`./${documentationFile}`, "utf-8");
-  if (!readme)
-    throw new Error(
-      `Could not read the documentation file: ${documentationFile}`
-    );
+  if (!readme) {
+    setFailed(`Could not read the documentation file: ${documentationFile}`);
+    return;
+  }
+
   const comment = {
     start: `<!-- START GENERATED DOCUMENTATION -->`,
     end: `<!-- END GENERATED DOCUMENTATION -->`,

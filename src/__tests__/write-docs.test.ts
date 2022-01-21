@@ -1,6 +1,6 @@
 import { writeDocs } from "../write-docs";
 import fs from "fs";
-import { exportVariable } from "@actions/core";
+import { exportVariable, setFailed } from "@actions/core";
 
 jest.mock("fs");
 jest.mock("@actions/core");
@@ -91,14 +91,9 @@ A GitHub action to help document your GitHub actions.
 
   test("can't find file", async () => {
     jest.spyOn(fs, "readFileSync").mockImplementationOnce(() => undefined);
-    try {
-      writeDocs(exampleDocs, "README.md");
-      // Fail test if above expression doesn't throw anything.
-      expect(true).toBe(false);
-    } catch (e) {
-      expect(e.message).toBe(
-        "Could not read the documentation file: README.md"
-      );
-    }
+    writeDocs(exampleDocs, "README.md");
+    expect(setFailed).toHaveBeenCalledWith(
+      "Could not read the documentation file: README.md"
+    );
   });
 });

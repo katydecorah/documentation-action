@@ -1,6 +1,15 @@
 import { formatInputs } from "./format-inputs";
+import { ActionConfig } from "./index";
 
-export function buildDocs({ exampleWorkflowYaml, action, release }) {
+export function buildDocs({
+  exampleWorkflowYaml,
+  action,
+  release,
+}: {
+  exampleWorkflowYaml: string;
+  action: ActionConfig;
+  release: string;
+}): string {
   let docs = `
 ## Set up the workflow
 

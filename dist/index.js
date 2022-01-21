@@ -5575,8 +5575,10 @@ var lib_core = __nccwpck_require__(186);
 
 function writeDocs(doc, documentationFile) {
     const readme = (0,external_fs_.readFileSync)(`./${documentationFile}`, "utf-8");
-    if (!readme)
-        throw new Error(`Could not read the documentation file: ${documentationFile}`);
+    if (!readme) {
+        (0,lib_core.setFailed)(`Could not read the documentation file: ${documentationFile}`);
+        return;
+    }
     const comment = {
         start: `<!-- START GENERATED DOCUMENTATION -->`,
         end: `<!-- END GENERATED DOCUMENTATION -->`,
@@ -5634,7 +5636,7 @@ function showDeprecation(value) {
 
 ;// CONCATENATED MODULE: ./src/build-docs.ts
 
-function buildDocs({ exampleWorkflowYaml, action, release }) {
+function buildDocs({ exampleWorkflowYaml, action, release, }) {
     let docs = `
 ## Set up the workflow
 
