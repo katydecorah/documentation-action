@@ -15,6 +15,7 @@ To use this action, create a new workflow in `.github/workflows` and modify it a
 
 ```yml
 name: Document GitHub action
+
 on:
   push:
     paths:
