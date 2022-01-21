@@ -1795,14 +1795,14 @@ function showDeprecation(value) {
 
 ;// CONCATENATED MODULE: ./src/build-docs.ts
 
-function buildDocs({ exampleWorkflowYaml, action, release, }) {
+function buildDocs({ workflow, action, release, }) {
     let docs = `
 ## Set up the workflow
 
 To use this action, create a new workflow in \`.github/workflows\` and modify it as needed:
 
 \`\`\`yml
-${trimExampleWorkflow({ exampleWorkflowYaml, release })}
+${trimExampleWorkflow({ workflow, release })}
 \`\`\``;
     // Document inputs, if they exist
     if ("inputs" in action) {
@@ -1814,8 +1814,8 @@ ${formatInputs(action.inputs)}`;
     }
     return docs;
 }
-function trimExampleWorkflow({ exampleWorkflowYaml, release }) {
-    return exampleWorkflowYaml.replace("uses: ./", `uses: ${release}`).trim();
+function trimExampleWorkflow({ workflow, release }) {
+    return workflow.replace("uses: ./", `uses: ${release}`).trim();
 }
 
 ;// CONCATENATED MODULE: ./node_modules/js-yaml/dist/js-yaml.mjs
@@ -5736,17 +5736,17 @@ function docs() {
     return action_awaiter(this, void 0, void 0, function* () {
         try {
             // Get workflow metadata
-            const [exampleWorkflowYaml, action, release] = yield Promise.all([
+            const [workflow, action, release] = yield Promise.all([
                 getWorkflow(),
                 getActionConfig(),
                 getRelease(),
             ]);
-            if (!exampleWorkflowYaml || !action || !release) {
-                (0,core.setFailed)('Unable to get action metadata');
+            if (!workflow || !action || !release) {
+                (0,core.setFailed)("Unable to get action metadata");
                 return;
             }
             // Build docs
-            const docs = buildDocs({ exampleWorkflowYaml, action, release });
+            const docs = buildDocs({ workflow, action, release });
             // Write docs
             yield writeDocs(docs);
         }

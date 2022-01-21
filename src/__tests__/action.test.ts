@@ -9,10 +9,7 @@ import * as core from "@actions/core";
 jest.mock("@actions/core");
 
 const action = load(readFileSync("./action.yml", "utf-8"));
-const exampleWorkflowYaml = readFileSync(
-  "./.github/workflows/example.yml",
-  "utf-8"
-);
+const workflow = readFileSync("./.github/workflows/example.yml", "utf-8");
 
 beforeEach(() => {
   jest.spyOn(core, "getInput").mockImplementation(() => "README.md");
@@ -23,7 +20,7 @@ describe("action", () => {
     const writeFileSpy = jest.spyOn(promises, "writeFile").mockImplementation();
     const getWorkflowSpy = jest
       .spyOn(GetMetadata, "getWorkflow")
-      .mockReturnValueOnce(exampleWorkflowYaml);
+      .mockReturnValueOnce(workflow);
     const getActionSpy = jest
       .spyOn(GetMetadata, "getActionConfig")
       .mockReturnValueOnce(action);
@@ -42,9 +39,7 @@ describe("action", () => {
   });
 
   test("writeFile fails", async () => {
-    jest
-      .spyOn(GetMetadata, "getWorkflow")
-      .mockReturnValueOnce(exampleWorkflowYaml);
+    jest.spyOn(GetMetadata, "getWorkflow").mockReturnValueOnce(workflow);
     jest.spyOn(GetMetadata, "getActionConfig").mockReturnValueOnce(action);
     jest
       .spyOn(GetMetadata, "getRelease")

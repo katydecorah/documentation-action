@@ -6,18 +6,18 @@ import { getWorkflow, getActionConfig, getRelease } from "./get-metadata";
 export async function docs() {
   try {
     // Get workflow metadata
-    const [exampleWorkflowYaml, action, release] = await Promise.all([
+    const [workflow, action, release] = await Promise.all([
       getWorkflow(),
       getActionConfig(),
       getRelease(),
     ]);
 
-    if (!exampleWorkflowYaml || !action || !release) {
+    if (!workflow || !action || !release) {
       setFailed("Unable to get action metadata");
       return;
     }
     // Build docs
-    const docs = buildDocs({ exampleWorkflowYaml, action, release });
+    const docs = buildDocs({ workflow, action, release });
     // Write docs
     await writeDocs(docs);
   } catch (error) {

@@ -2,11 +2,11 @@ import { formatInputs } from "./format-inputs";
 import { ActionConfig } from "./action";
 
 export function buildDocs({
-  exampleWorkflowYaml,
+  workflow,
   action,
   release,
 }: {
-  exampleWorkflowYaml: string;
+  workflow: string;
   action: ActionConfig;
   release: string;
 }): string {
@@ -16,7 +16,7 @@ export function buildDocs({
 To use this action, create a new workflow in \`.github/workflows\` and modify it as needed:
 
 \`\`\`yml
-${trimExampleWorkflow({ exampleWorkflowYaml, release })}
+${trimExampleWorkflow({ workflow, release })}
 \`\`\``;
   // Document inputs, if they exist
   if ("inputs" in action) {
@@ -29,6 +29,6 @@ ${formatInputs(action.inputs)}`;
   return docs;
 }
 
-export function trimExampleWorkflow({ exampleWorkflowYaml, release }) {
-  return exampleWorkflowYaml.replace("uses: ./", `uses: ${release}`).trim();
+export function trimExampleWorkflow({ workflow, release }) {
+  return workflow.replace("uses: ./", `uses: ${release}`).trim();
 }
