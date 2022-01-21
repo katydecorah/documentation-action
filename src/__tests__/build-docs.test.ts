@@ -3,16 +3,13 @@ import { readFileSync } from "fs";
 import { load } from "js-yaml";
 
 const action = load(readFileSync("./action.yml", "utf-8"));
-const exampleWorkflowYaml = readFileSync(
-  "./.github/workflows/example.yml",
-  "utf-8"
-);
+const workflow = readFileSync("./.github/workflows/example.yml", "utf-8");
 
 describe("buildDocs", () => {
   test("with inputs", () => {
     expect(
       buildDocs({
-        exampleWorkflowYaml,
+        workflow,
         release: "katydecorah/documentation-action@v0.1.0",
         action,
       })
@@ -24,6 +21,7 @@ describe("buildDocs", () => {
 
       \`\`\`yml
       name: Document GitHub action
+
       on:
         push:
           paths:
@@ -62,7 +60,7 @@ describe("buildDocs", () => {
   test("without inputs", () => {
     expect(
       buildDocs({
-        exampleWorkflowYaml,
+        workflow,
         release: "katydecorah/documentation-action@v0.1.0",
         action: {},
       })
@@ -74,6 +72,7 @@ describe("buildDocs", () => {
 
       \`\`\`yml
       name: Document GitHub action
+
       on:
         push:
           paths:
@@ -106,11 +105,12 @@ describe("buildDocs", () => {
 test("trimExampleWorkflow", () => {
   expect(
     trimExampleWorkflow({
-      exampleWorkflowYaml,
+      workflow,
       release: "katydecorah/documentation-action@v0.1.0",
     })
   ).toMatchInlineSnapshot(`
     "name: Document GitHub action
+
     on:
       push:
         paths:

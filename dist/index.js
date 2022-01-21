@@ -1713,8 +1713,111 @@ __nccwpck_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ src)
 });
 
-// EXTERNAL MODULE: external "fs"
-var external_fs_ = __nccwpck_require__(147);
+// EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
+var core = __nccwpck_require__(186);
+;// CONCATENATED MODULE: external "fs/promises"
+const promises_namespaceObject = require("fs/promises");
+;// CONCATENATED MODULE: ./src/write-docs.ts
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+function writeDocs(doc) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const documentationFile = (0,core.getInput)("documentationFile");
+        const readme = yield (0,promises_namespaceObject.readFile)(`./${documentationFile}`, "utf-8");
+        if (!readme) {
+            (0,core.setFailed)(`Could not read the documentation file: ${documentationFile}`);
+            return;
+        }
+        const comment = {
+            start: `<!-- START GENERATED DOCUMENTATION -->`,
+            end: `<!-- END GENERATED DOCUMENTATION -->`,
+        };
+        const preparedDocs = commentedDocs(comment, doc);
+        const regex = new RegExp(`${comment.start}([\\s\\S]*?)${comment.end}`, "gm");
+        const oldFile = readme.match(regex);
+        let newFile;
+        if (oldFile) {
+            // Find and replace generated documentation
+            newFile = readme.replace(oldFile[0].toString(), preparedDocs);
+            // If there are no changes to documentation, return early.
+            if (oldFile[0].toString() === preparedDocs) {
+                (0,core.exportVariable)("UpdateDocumentation", false);
+                return;
+            }
+        }
+        else {
+            // If we can't find the comments, then append documentation to the bottom of the page.
+            newFile = `${readme}
+
+${preparedDocs}
+`;
+        }
+        (0,core.exportVariable)("UpdateDocumentation", true);
+        yield (0,promises_namespaceObject.writeFile)(`./${documentationFile}`, newFile);
+    });
+}
+function commentedDocs(comment, doc) {
+    return `${comment.start}
+${doc}${comment.end}`;
+}
+
+;// CONCATENATED MODULE: ./src/format-inputs.ts
+function formatInputs(inputs) {
+    const formattedInputs = Object.keys(inputs)
+        .map((key) => `- \`${key}\`: ${showRequired(inputs[key].required)}${inputs[key].description}${showDefault(inputs[key].default)}\n${showDeprecation(inputs[key].deprecationMessage)}\n`)
+        .join("");
+    return formattedInputs;
+}
+function showRequired(value) {
+    if (!value)
+        return "";
+    return "Required. ";
+}
+function showDefault(value) {
+    if (!value)
+        return "";
+    return ` Default: \`${value}\`.`;
+}
+function showDeprecation(value) {
+    if (!value)
+        return "";
+    return ` Deprecation warning: \`${value}\``;
+}
+
+;// CONCATENATED MODULE: ./src/build-docs.ts
+
+function buildDocs({ workflow, action, release, }) {
+    let docs = `
+## Set up the workflow
+
+To use this action, create a new workflow in \`.github/workflows\` and modify it as needed:
+
+\`\`\`yml
+${trimExampleWorkflow({ workflow, release })}
+\`\`\``;
+    // Document inputs, if they exist
+    if ("inputs" in action) {
+        docs += `
+
+## Action options
+
+${formatInputs(action.inputs)}`;
+    }
+    return docs;
+}
+function trimExampleWorkflow({ workflow, release }) {
+    return workflow.replace("uses: ./", `uses: ${release}`).trim();
+}
+
 ;// CONCATENATED MODULE: ./node_modules/js-yaml/dist/js-yaml.mjs
 
 /*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT */
@@ -2458,7 +2561,7 @@ var json = failsafe.extend({
   ]
 });
 
-var core = json;
+var js_yaml_core = json;
 
 var YAML_DATE_REGEXP = new RegExp(
   '^([0-9][0-9][0-9][0-9])'          + // [1] year
@@ -2795,7 +2898,7 @@ var set = new type('tag:yaml.org,2002:set', {
   construct: constructYamlSet
 });
 
-var _default = core.extend({
+var _default = js_yaml_core.extend({
   implicit: [
     timestamp,
     merge
@@ -5519,7 +5622,7 @@ var Type                = type;
 var Schema              = schema;
 var FAILSAFE_SCHEMA     = failsafe;
 var JSON_SCHEMA         = json;
-var CORE_SCHEMA         = core;
+var CORE_SCHEMA         = js_yaml_core;
 var DEFAULT_SCHEMA      = _default;
 var load                = loader.load;
 var loadAll             = loader.loadAll;
@@ -5568,97 +5671,55 @@ var jsYaml = {
 /* harmony default export */ const js_yaml = ((/* unused pure expression or super */ null && (jsYaml)));
 
 
-// EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
-var lib_core = __nccwpck_require__(186);
-;// CONCATENATED MODULE: ./src/write-docs.ts
+;// CONCATENATED MODULE: ./src/get-metadata.ts
+var get_metadata_awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 
 
-function writeDocs(doc, documentationFile) {
-    const readme = (0,external_fs_.readFileSync)(`./${documentationFile}`, "utf-8");
-    if (!readme)
-        throw new Error(`Could not read the documentation file: ${documentationFile}`);
-    const comment = {
-        start: `<!-- START GENERATED DOCUMENTATION -->`,
-        end: `<!-- END GENERATED DOCUMENTATION -->`,
-    };
-    const preparedDocs = commentedDocs(comment, doc);
-    const regex = new RegExp(`${comment.start}([\\s\\S]*?)${comment.end}`, "gm");
-    const oldFile = readme.match(regex);
-    let newFile;
-    if (oldFile) {
-        // Find and replace generated documentation
-        newFile = readme.replace(oldFile[0].toString(), preparedDocs);
-        // If there are no changes to documentation, return early.
-        if (oldFile[0].toString() === preparedDocs) {
-            (0,lib_core.exportVariable)("UpdateDocumentation", false);
-            return;
+
+function getWorkflow() {
+    return get_metadata_awaiter(this, void 0, void 0, function* () {
+        const exampleWorkflowFile = (0,core.getInput)("exampleWorkflowFile");
+        try {
+            return yield (0,promises_namespaceObject.readFile)(`./.github/workflows/${exampleWorkflowFile}`, "utf-8");
         }
-    }
-    else {
-        // If we can't find the comments, then append documentation to the bottom of the page.
-        newFile = `${readme}
-
-${preparedDocs}
-`;
-    }
-    (0,lib_core.exportVariable)("UpdateDocumentation", true);
-    (0,external_fs_.writeFileSync)(`./${documentationFile}`, newFile);
+        catch (error) {
+            (0,core.setFailed)(error.message);
+        }
+    });
 }
-function commentedDocs(comment, doc) {
-    return `${comment.start}
-${doc}${comment.end}`;
+function getActionConfig() {
+    return get_metadata_awaiter(this, void 0, void 0, function* () {
+        try {
+            const actionConfig = yield (0,promises_namespaceObject.readFile)("./action.yml", "utf-8");
+            return load(actionConfig);
+        }
+        catch (error) {
+            (0,core.setFailed)(error.message);
+        }
+    });
 }
-
-;// CONCATENATED MODULE: ./src/format-inputs.ts
-function formatInputs(inputs) {
-    const formattedInputs = Object.keys(inputs)
-        .map((key) => `- \`${key}\`: ${showRequired(inputs[key].required)}${inputs[key].description}${showDefault(inputs[key].default)}\n${showDeprecation(inputs[key].deprecationMessage)}\n`)
-        .join("");
-    return formattedInputs;
-}
-function showRequired(value) {
-    if (!value)
-        return "";
-    return "Required. ";
-}
-function showDefault(value) {
-    if (!value)
-        return "";
-    return ` Default: \`${value}\`.`;
-}
-function showDeprecation(value) {
-    if (!value)
-        return "";
-    return ` Deprecation warning: \`${value}\``;
+function getRelease() {
+    return get_metadata_awaiter(this, void 0, void 0, function* () {
+        try {
+            const { version } = JSON.parse(yield (0,promises_namespaceObject.readFile)("./package.json", "utf-8"));
+            return `${process.env.GITHUB_REPOSITORY}@v${version}`;
+        }
+        catch (error) {
+            (0,core.setFailed)(error.message);
+        }
+    });
 }
 
-;// CONCATENATED MODULE: ./src/build-docs.ts
-
-function buildDocs({ exampleWorkflowYaml, action, release }) {
-    let docs = `
-## Set up the workflow
-
-To use this action, create a new workflow in \`.github/workflows\` and modify it as needed:
-
-\`\`\`yml
-${trimExampleWorkflow({ exampleWorkflowYaml, release })}
-\`\`\``;
-    // Document inputs, if they exist
-    if ("inputs" in action) {
-        docs += `
-
-## Action options
-
-${formatInputs(action.inputs)}`;
-    }
-    return docs;
-}
-function trimExampleWorkflow({ exampleWorkflowYaml, release }) {
-    return exampleWorkflowYaml.replace("uses: ./", `uses: ${release}`).trim();
-}
-
-;// CONCATENATED MODULE: ./src/index.ts
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+;// CONCATENATED MODULE: ./src/action.ts
+var action_awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -5671,25 +5732,32 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
-
 function docs() {
-    return __awaiter(this, void 0, void 0, function* () {
+    return action_awaiter(this, void 0, void 0, function* () {
         try {
-            const exampleWorkflowFile = (0,lib_core.getInput)("exampleWorkflowFile");
-            const exampleWorkflowYaml = (0,external_fs_.readFileSync)(`./.github/workflows/${exampleWorkflowFile}`, "utf8");
-            const documentationFile = (0,lib_core.getInput)("documentationFile");
-            const actionConfig = (0,external_fs_.readFileSync)("./action.yml", "utf8");
-            const action = load(actionConfig);
-            const { version } = JSON.parse((0,external_fs_.readFileSync)("./package.json", "utf-8"));
-            const release = `${process.env.GITHUB_REPOSITORY}@v${version}`;
-            const docs = buildDocs({ exampleWorkflowYaml, action, release });
-            writeDocs(docs, documentationFile);
+            // Get workflow metadata
+            const [workflow, action, release] = yield Promise.all([
+                getWorkflow(),
+                getActionConfig(),
+                getRelease(),
+            ]);
+            if (!workflow || !action || !release) {
+                (0,core.setFailed)("Unable to get action metadata");
+                return;
+            }
+            // Build docs
+            const docs = buildDocs({ workflow, action, release });
+            // Write docs
+            yield writeDocs(docs);
         }
         catch (error) {
-            (0,lib_core.setFailed)(error.message);
+            (0,core.setFailed)(error.message);
         }
     });
 }
+
+;// CONCATENATED MODULE: ./src/index.ts
+
 /* harmony default export */ const src = (docs());
 
 })();

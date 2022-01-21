@@ -1,4 +1,4 @@
-import { ActionConfig } from "./index";
+import { ActionConfig } from "./action";
 
 export function formatInputs(inputs: ActionConfig["inputs"]) {
   const formattedInputs = Object.keys(inputs)
