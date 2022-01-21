@@ -21,6 +21,7 @@ describe("buildDocs", () => {
 
       \`\`\`yml
       name: Document GitHub action
+
       on:
         push:
           paths:
@@ -71,6 +72,7 @@ describe("buildDocs", () => {
 
       \`\`\`yml
       name: Document GitHub action
+
       on:
         push:
           paths:
@@ -108,6 +110,7 @@ test("trimExampleWorkflow", () => {
     })
   ).toMatchInlineSnapshot(`
     "name: Document GitHub action
+
     on:
       push:
         paths:
