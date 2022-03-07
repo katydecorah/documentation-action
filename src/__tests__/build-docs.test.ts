@@ -36,7 +36,7 @@ describe("buildDocs", () => {
           name: Write documentation
           steps:
             - name: Checkout
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
             - name: Documentation action
               uses: katydecorah/documentation-action@v0.1.0
             - name: Commit files
@@ -87,7 +87,7 @@ describe("buildDocs", () => {
           name: Write documentation
           steps:
             - name: Checkout
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
             - name: Documentation action
               uses: katydecorah/documentation-action@v0.1.0
             - name: Commit files
@@ -125,7 +125,7 @@ test("trimExampleWorkflow", () => {
         name: Write documentation
         steps:
           - name: Checkout
-            uses: actions/checkout@v2
+            uses: actions/checkout@v3
           - name: Documentation action
             uses: katydecorah/documentation-action@v0.1.0
           - name: Commit files
