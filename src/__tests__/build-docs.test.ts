@@ -25,10 +25,10 @@ describe("buildDocs", () => {
       on:
         push:
           paths:
-            - \\".github/workflows/example.yml\\"
-            - \\"action.yml\\"
-            - \\"package.json\\"
-            - \\"README.md\\"
+            - ".github/workflows/example.yml"
+            - "action.yml"
+            - "package.json"
+            - "README.md"
 
       jobs:
         document_action:
@@ -42,9 +42,9 @@ describe("buildDocs", () => {
             - name: Commit files
               if: env.UpdateDocumentation == 'true'
               run: |
-                git config --local user.email \\"action@github.com\\"
-                git config --local user.name \\"GitHub Action\\"
-                git commit -am \\"Update documentation\\"
+                git config --local user.email "action@github.com"
+                git config --local user.name "GitHub Action"
+                git commit -am "Update documentation"
                 git push
       \`\`\`
 
@@ -76,10 +76,10 @@ describe("buildDocs", () => {
       on:
         push:
           paths:
-            - \\".github/workflows/example.yml\\"
-            - \\"action.yml\\"
-            - \\"package.json\\"
-            - \\"README.md\\"
+            - ".github/workflows/example.yml"
+            - "action.yml"
+            - "package.json"
+            - "README.md"
 
       jobs:
         document_action:
@@ -93,9 +93,9 @@ describe("buildDocs", () => {
             - name: Commit files
               if: env.UpdateDocumentation == 'true'
               run: |
-                git config --local user.email \\"action@github.com\\"
-                git config --local user.name \\"GitHub Action\\"
-                git commit -am \\"Update documentation\\"
+                git config --local user.email "action@github.com"
+                git config --local user.name "GitHub Action"
+                git commit -am "Update documentation"
                 git push
       \`\`\`"
     `);
@@ -114,10 +114,10 @@ test("trimExampleWorkflow", () => {
     on:
       push:
         paths:
-          - \\".github/workflows/example.yml\\"
-          - \\"action.yml\\"
-          - \\"package.json\\"
-          - \\"README.md\\"
+          - ".github/workflows/example.yml"
+          - "action.yml"
+          - "package.json"
+          - "README.md"
 
     jobs:
       document_action:
@@ -131,9 +131,9 @@ test("trimExampleWorkflow", () => {
           - name: Commit files
             if: env.UpdateDocumentation == 'true'
             run: |
-              git config --local user.email \\"action@github.com\\"
-              git config --local user.name \\"GitHub Action\\"
-              git commit -am \\"Update documentation\\"
+              git config --local user.email "action@github.com"
+              git config --local user.name "GitHub Action"
+              git commit -am "Update documentation"
               git push"
   `);
 });

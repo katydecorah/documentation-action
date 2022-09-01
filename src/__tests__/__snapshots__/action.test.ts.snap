@@ -12,10 +12,10 @@ name: Document GitHub action
 on:
   push:
     paths:
-      - \\".github/workflows/example.yml\\"
-      - \\"action.yml\\"
-      - \\"package.json\\"
-      - \\"README.md\\"
+      - ".github/workflows/example.yml"
+      - "action.yml"
+      - "package.json"
+      - "README.md"
 
 jobs:
   document_action:
@@ -29,9 +29,9 @@ jobs:
       - name: Commit files
         if: env.UpdateDocumentation == 'true'
         run: |
-          git config --local user.email \\"action@github.com\\"
-          git config --local user.name \\"GitHub Action\\"
-          git commit -am \\"Update documentation\\"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -am "Update documentation"
           git push
 \`\`\`
 
@@ -45,7 +45,7 @@ jobs:
 `;
 
 exports[`action works 2`] = `
-Array [
+[
   "./README.md",
   "# documentation-action
 
@@ -68,10 +68,10 @@ name: Document GitHub action
 on:
   push:
     paths:
-      - \\".github/workflows/example.yml\\"
-      - \\"action.yml\\"
-      - \\"package.json\\"
-      - \\"README.md\\"
+      - ".github/workflows/example.yml"
+      - "action.yml"
+      - "package.json"
+      - "README.md"
 
 jobs:
   document_action:
@@ -85,9 +85,9 @@ jobs:
       - name: Commit files
         if: env.UpdateDocumentation == 'true'
         run: |
-          git config --local user.email \\"action@github.com\\"
-          git config --local user.name \\"GitHub Action\\"
-          git commit -am \\"Update documentation\\"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -am "Update documentation"
           git push
 \`\`\`
 

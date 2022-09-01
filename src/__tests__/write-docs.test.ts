@@ -33,7 +33,7 @@ Hello!
     const writeMock = jest.spyOn(promises, "writeFile").mockImplementation();
     await writeDocs(exampleDocs);
     expect(writeMock.mock.calls[0]).toMatchInlineSnapshot(`
-      Array [
+      [
         "./README.md",
         "# documentation-action
 
@@ -60,7 +60,7 @@ Hello!
     const writeMock = jest.spyOn(promises, "writeFile").mockImplementation();
     await writeDocs(exampleDocs);
     expect(writeMock.mock.calls[0]).toMatchInlineSnapshot(`
-      Array [
+      [
         "./README.md",
         "# documentation-action
 
