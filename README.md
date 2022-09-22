@@ -47,7 +47,5 @@ jobs:
 ## Action options
 
 - `exampleWorkflowFile`: The example workflow file in `.github/workflows/` Default: `example.yml`.
-
 - `documentationFile`: The file where the action will write and update documentation for the action. Default: `README.md`.
-
 <!-- END GENERATED DOCUMENTATION -->
