@@ -53,7 +53,8 @@ To trigger the action, [create a workflow dispatch event](https://docs.github.co
     ${formatWorkflowInputs(workflow.on.workflow_dispatch.inputs)}
   }
 }
-\`\`\``;
+\`\`\`
+`;
 }
 
 function formatWorkflowInputs(inputs: Inputs) {
@@ -63,5 +64,5 @@ function formatWorkflowInputs(inputs: Inputs) {
         inputs[key].description
       }.`;
     })
-    .join("\n\t");
+    .join("\n    ");
 }

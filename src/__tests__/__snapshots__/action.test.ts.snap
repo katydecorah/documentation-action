@@ -59,10 +59,11 @@ To trigger the action, [create a workflow dispatch event](https://docs.github.co
   "ref": "main", // Required. The git reference for the workflow, a branch or tag name.
   "inputs": {
     "bookIsbn": "", // Required.  The book's ISBN.
-	"notes": "", //  Notes about the book.
+    "notes": "", //  Notes about the book.
   }
 }
-\`\`\`"
+\`\`\`
+"
 `;
 
 exports[`action works 2`] = `
@@ -136,10 +137,11 @@ To trigger the action, [create a workflow dispatch event](https://docs.github.co
   "ref": "main", // Required. The git reference for the workflow, a branch or tag name.
   "inputs": {
     "bookIsbn": "", // Required.  The book's ISBN.
-	"notes": "", //  Notes about the book.
+    "notes": "", //  Notes about the book.
   }
 }
-\`\`\`<!-- END GENERATED DOCUMENTATION -->
+\`\`\`
+<!-- END GENERATED DOCUMENTATION -->
 ",
 ]
 `;

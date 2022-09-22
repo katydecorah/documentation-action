@@ -2955,14 +2955,15 @@ To trigger the action, [create a workflow dispatch event](https://docs.github.co
     ${formatWorkflowInputs(workflow.on.workflow_dispatch.inputs)}
   }
 }
-\`\`\``;
+\`\`\`
+`;
 }
 function formatWorkflowInputs(inputs) {
     return Object.keys(inputs)
         .map((key) => {
         return `"${key}": "", // ${showRequired(inputs[key].required)} ${inputs[key].description}.`;
     })
-        .join("\n\t");
+        .join("\n    ");
 }
 
 ;// CONCATENATED MODULE: ./node_modules/js-yaml/dist/js-yaml.mjs
