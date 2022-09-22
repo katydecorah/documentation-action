@@ -192,7 +192,6 @@ describe("buildDocs", () => {
         "ref": "main", // Required. The git reference for the workflow, a branch or tag name.
         "inputs": {
           "bookIsbn": "", // Required. The book's ISBN.
-
           "notes": "", // Notes about the book.
 
         }

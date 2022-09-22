@@ -10,10 +10,8 @@ export function formatInputs(inputs: ActionConfig["inputs"]): string {
 
 export function formatWorkflowInputs(inputs: Inputs): string {
   return Object.keys(inputs)
-    .map((key) => {
-      return `"${key}": "", // ${inputMetdata(inputs[key])}`;
-    })
-    .join("\n    ");
+    .map((key) => `"${key}": "", // ${inputMetdata(inputs[key])}`)
+    .join("    ");
 }
 
 function inputMetdata(input: Input): string {

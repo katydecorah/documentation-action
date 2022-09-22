@@ -2905,10 +2905,8 @@ function formatInputs(inputs) {
 }
 function formatWorkflowInputs(inputs) {
     return Object.keys(inputs)
-        .map((key) => {
-        return `"${key}": "", // ${inputMetdata(inputs[key])}`;
-    })
-        .join("\n    ");
+        .map((key) => `"${key}": "", // ${inputMetdata(inputs[key])}`)
+        .join("    ");
 }
 function inputMetdata(input) {
     return `${showRequired(input.required)}${input.description}${showDefault(input.default)}\n${showDeprecation(input.deprecationMessage)}`;
