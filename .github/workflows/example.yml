@@ -7,15 +7,6 @@ on:
       - "action.yml"
       - "package.json"
       - "README.md"
-  workflow_dispatch:
-    inputs:
-      bookIsbn:
-        description: The book's ISBN
-        required: true
-        type: string
-      notes:
-        description: Notes about the book
-        type: string
 
 jobs:
   document_action:
