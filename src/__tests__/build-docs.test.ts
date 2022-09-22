@@ -73,7 +73,7 @@ describe("buildDocs", () => {
 
       - \`documentationFile\`: The file where the action will write and update documentation for the action. Default: \`README.md\`.
 
-      ## Trigger the workflow
+      ## Trigger the action
 
       To trigger the action, [create a workflow dispatch event](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event) with the following body parameters:
 
@@ -82,12 +82,10 @@ describe("buildDocs", () => {
         "ref": "main", // Required. The git reference for the workflow, a branch or tag name.
         "inputs": {
           "bookIsbn": "", // Required.  The book's ISBN.
-      "notes": "", //  Notes about the book.
+      	"notes": "", //  Notes about the book.
         }
       }
-      \`\`\`
-
-      "
+      \`\`\`"
     `);
   });
   test("without inputs", () => {
@@ -139,7 +137,7 @@ describe("buildDocs", () => {
                 git config --local user.name "GitHub Action"
                 git commit -am "Update documentation"
                 git push
-      \`\`\`## Trigger the workflow
+      \`\`\`## Trigger the action
 
       To trigger the action, [create a workflow dispatch event](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event) with the following body parameters:
 
@@ -148,12 +146,10 @@ describe("buildDocs", () => {
         "ref": "main", // Required. The git reference for the workflow, a branch or tag name.
         "inputs": {
           "bookIsbn": "", // Required.  The book's ISBN.
-      "notes": "", //  Notes about the book.
+      	"notes": "", //  Notes about the book.
         }
       }
-      \`\`\`
-
-      "
+      \`\`\`"
     `);
   });
 

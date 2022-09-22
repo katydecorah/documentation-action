@@ -42,7 +42,7 @@ export function trimExampleWorkflow({ workflow, release }): string {
 export function workflowDispatchInputs(workflow: WorkflowJson) {
   if (!workflow.on.workflow_dispatch || !workflow.on.workflow_dispatch.inputs)
     return;
-  return `## Trigger the workflow
+  return `## Trigger the action
 
 To trigger the action, [create a workflow dispatch event](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event) with the following body parameters:
 
@@ -53,9 +53,7 @@ To trigger the action, [create a workflow dispatch event](https://docs.github.co
     ${formatWorkflowInputs(workflow.on.workflow_dispatch.inputs)}
   }
 }
-\`\`\`
-
-`;
+\`\`\``;
 }
 
 function formatWorkflowInputs(inputs: Inputs) {
@@ -65,5 +63,5 @@ function formatWorkflowInputs(inputs: Inputs) {
         inputs[key].description
       }.`;
     })
-    .join("\n");
+    .join("\n\t");
 }

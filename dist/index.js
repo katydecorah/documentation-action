@@ -2944,7 +2944,7 @@ function trimExampleWorkflow({ workflow, release }) {
 function workflowDispatchInputs(workflow) {
     if (!workflow.on.workflow_dispatch || !workflow.on.workflow_dispatch.inputs)
         return;
-    return `## Trigger the workflow
+    return `## Trigger the action
 
 To trigger the action, [create a workflow dispatch event](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event) with the following body parameters:
 
@@ -2955,15 +2955,14 @@ To trigger the action, [create a workflow dispatch event](https://docs.github.co
     ${formatWorkflowInputs(workflow.on.workflow_dispatch.inputs)}
   }
 }
-\`\`\`
-  `;
+\`\`\``;
 }
 function formatWorkflowInputs(inputs) {
     return Object.keys(inputs)
         .map((key) => {
         return `"${key}": "", // ${showRequired(inputs[key].required)} ${inputs[key].description}.`;
     })
-        .join("\n");
+        .join("\n\t");
 }
 
 ;// CONCATENATED MODULE: ./node_modules/js-yaml/dist/js-yaml.mjs
