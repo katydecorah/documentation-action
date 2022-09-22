@@ -3,13 +3,17 @@ import { load } from "js-yaml";
 import { getInput } from "@actions/core";
 import { ActionConfig } from "./action";
 
-export async function getWorkflow(): Promise<string | undefined> {
+export async function getWorkflow(): Promise<WorkflowConfig | undefined> {
   const exampleWorkflowFile: string = getInput("exampleWorkflowFile");
   try {
-    return await readFile(
+    const yaml = await readFile(
       `./.github/workflows/${exampleWorkflowFile}`,
       "utf-8"
     );
+    return {
+      yaml,
+      json: load(yaml) as WorkflowJson,
+    };
   } catch (error) {
     throw new Error(error);
   }
@@ -32,3 +36,33 @@ export async function getRelease(): Promise<string> {
     throw new Error(error);
   }
 }
+
+export type WorkflowConfig = {
+  yaml: string;
+  json: WorkflowJson;
+};
+
+export type Input = {
+  description: string;
+  required?: boolean;
+  type?: string;
+  default?: string;
+  deprecationMessage?: string;
+};
+
+export type Inputs = {
+  [key: string]: Input;
+};
+
+export type WorkflowJson = {
+  name: string;
+  on: {
+    push: {
+      paths: string[];
+    };
+    workflow_dispatch?: {
+      inputs?: Inputs;
+    };
+  };
+  jobs: Record<string, unknown>;
+};

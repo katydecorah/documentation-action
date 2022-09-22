@@ -9,7 +9,12 @@ import * as core from "@actions/core";
 jest.mock("@actions/core");
 
 const action = load(readFileSync("./action.yml", "utf-8")) as ActionConfig;
-const workflow = readFileSync("./.github/workflows/example.yml", "utf-8");
+const workflowYaml = readFileSync("./.github/workflows/example.yml", "utf-8");
+
+const workflow = {
+  yaml: workflowYaml,
+  json: load(workflowYaml),
+};
 
 beforeEach(() => {
   jest.spyOn(core, "getInput").mockImplementation(() => "README.md");

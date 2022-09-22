@@ -2899,9 +2899,17 @@ ${doc}${comment.end}`;
 ;// CONCATENATED MODULE: ./src/format-inputs.ts
 function formatInputs(inputs) {
     const formattedInputs = Object.keys(inputs)
-        .map((key) => `- \`${key}\`: ${showRequired(inputs[key].required)}${inputs[key].description}${showDefault(inputs[key].default)}\n${showDeprecation(inputs[key].deprecationMessage)}\n`)
+        .map((key) => `- \`${key}\`: ${inputMetdata(inputs[key])}\n`)
         .join("");
     return formattedInputs;
+}
+function formatWorkflowInputs(inputs) {
+    return Object.keys(inputs)
+        .map((key) => `"${key}": "", // ${inputMetdata(inputs[key])}`)
+        .join("\n    ");
+}
+function inputMetdata(input) {
+    return `${showRequired(input.required)}${input.description}${showDefault(input.default)}${showDeprecation(input.deprecationMessage)}`;
 }
 function showRequired(value) {
     return !value ? "" : "Required. ";
@@ -2916,26 +2924,53 @@ function showDeprecation(value) {
 ;// CONCATENATED MODULE: ./src/build-docs.ts
 
 function buildDocs({ workflow, action, release, }) {
-    let docs = `
+    let docs = documentSetup(workflow, release);
+    // Document inputs, if they exist
+    docs += documentActionInputs(action) || "";
+    // Document workflow inputs, if they exist
+    docs += documentWorkflowInputs(workflow.json) || "";
+    return docs;
+}
+function trimExampleWorkflow({ workflow, release }) {
+    return workflow.replace("uses: ./", `uses: ${release}`).trim();
+}
+function documentSetup(workflow, release) {
+    return `
 ## Set up the workflow
 
 To use this action, create a new workflow in \`.github/workflows\` and modify it as needed:
 
 \`\`\`yml
-${trimExampleWorkflow({ workflow, release })}
-\`\`\``;
-    // Document inputs, if they exist
-    if ("inputs" in action) {
-        docs += `
+${trimExampleWorkflow({ workflow: workflow.yaml, release })}
+\`\`\`
+`;
+}
+function documentActionInputs(action) {
+    if (!action.inputs)
+        return;
+    return `
 
 ## Action options
 
 ${formatInputs(action.inputs)}`;
-    }
-    return docs;
 }
-function trimExampleWorkflow({ workflow, release }) {
-    return workflow.replace("uses: ./", `uses: ${release}`).trim();
+function documentWorkflowInputs(workflow) {
+    if (!workflow.on.workflow_dispatch || !workflow.on.workflow_dispatch.inputs)
+        return;
+    return `
+## Trigger the action
+
+To trigger the action, [create a workflow dispatch event](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event) with the following body parameters:
+
+\`\`\`js
+{ 
+  "ref": "main", // Required. The git reference for the workflow, a branch or tag name.
+  "inputs": {
+    ${formatWorkflowInputs(workflow.on.workflow_dispatch.inputs)}
+  }
+}
+\`\`\`
+`;
 }
 
 ;// CONCATENATED MODULE: ./node_modules/js-yaml/dist/js-yaml.mjs
@@ -6808,7 +6843,11 @@ function getWorkflow() {
     return get_metadata_awaiter(this, void 0, void 0, function* () {
         const exampleWorkflowFile = (0,core.getInput)("exampleWorkflowFile");
         try {
-            return yield (0,promises_namespaceObject.readFile)(`./.github/workflows/${exampleWorkflowFile}`, "utf-8");
+            const yaml = yield (0,promises_namespaceObject.readFile)(`./.github/workflows/${exampleWorkflowFile}`, "utf-8");
+            return {
+                yaml,
+                json: load(yaml),
+            };
         }
         catch (error) {
             throw new Error(error);

@@ -36,11 +36,13 @@ jobs:
       - name: Commit files
         if: env.UpdateDocumentation == 'true'
         run: |
+          git pull
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git commit -am "Update documentation"
           git push
 ```
+
 
 ## Action options
 
