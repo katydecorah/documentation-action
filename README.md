@@ -32,7 +32,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Documentation action
-        uses: katydecorah/documentation-action@v0.1.0
+        uses: katydecorah/documentation-action@v0.2.0
       - name: Commit files
         if: env.UpdateDocumentation == 'true'
         run: |
