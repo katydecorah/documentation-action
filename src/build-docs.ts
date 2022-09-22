@@ -46,7 +46,7 @@ export function workflowDispatchInputs(workflow: WorkflowJson) {
 
 To trigger the action, [create a workflow dispatch event](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event) with the following body parameters:
 
-\`\`\`json
+\`\`\`js
 { 
   "ref": "main", // Required. The git reference for the workflow, a branch or tag name.
   "inputs": {
@@ -64,5 +64,5 @@ function formatWorkflowInputs(inputs: Inputs) {
         inputs[key].description
       }.`;
     })
-    .join("\n\t ");
+    .join("\n");
 }

@@ -2932,15 +2932,9 @@ ${trimExampleWorkflow({ workflow: workflow.yaml, release })}
 
 ${formatInputs(action.inputs)}`;
     }
-    // Document inputs, if they exist
+    // Document workflow inputs, if they exist
     if (workflowDispatchInputs(workflow.json)) {
-        docs += `
-
-## Trigger the workflow dispatch
-
-To trigger the action, you will [create a workflow dispatch event](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event) with the following body parameters:
-
-${workflowDispatchInputs(workflow.json)}`;
+        docs += workflowDispatchInputs(workflow.json);
     }
     return docs;
 }
@@ -2950,9 +2944,13 @@ function trimExampleWorkflow({ workflow, release }) {
 function workflowDispatchInputs(workflow) {
     if (!workflow.on.workflow_dispatch || !workflow.on.workflow_dispatch.inputs)
         return;
-    return `\`\`\`json
+    return `## Trigger the workflow
+
+To trigger the action, [create a workflow dispatch event](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event) with the following body parameters:
+
+\`\`\`js
 { 
-  "ref": "main", // The git reference for the workflow, a branch or tag name.
+  "ref": "main", // Required. The git reference for the workflow, a branch or tag name.
   "inputs": {
     ${formatWorkflowInputs(workflow.on.workflow_dispatch.inputs)}
   }
@@ -2965,7 +2963,7 @@ function formatWorkflowInputs(inputs) {
         .map((key) => {
         return `"${key}": "", // ${showRequired(inputs[key].required)} ${inputs[key].description}.`;
     })
-        .join("\n\t ");
+        .join("\n");
 }
 
 ;// CONCATENATED MODULE: ./node_modules/js-yaml/dist/js-yaml.mjs
