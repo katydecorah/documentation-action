@@ -23,6 +23,15 @@ on:
       - "action.yml"
       - "package.json"
       - "README.md"
+  workflow_dispatch:
+    inputs:
+      bookIsbn:
+        description: The book's ISBN
+        required: true
+        type: string
+      notes:
+        description: Notes about the book
+        type: string
 
 jobs:
   document_action:
@@ -48,4 +57,19 @@ jobs:
 
 - `documentationFile`: The file where the action will write and update documentation for the action. Default: `README.md`.
 
-<!-- END GENERATED DOCUMENTATION -->
+
+
+## Trigger the workflow dispatch
+
+To trigger the action, you will [create a workflow dispatch event](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event) with the following body parameters:
+
+```json
+{ 
+  "ref": "main", // The git reference for the workflow, a branch or tag name.
+  "inputs": {
+    "bookIsbn": "", // Required.  The book's ISBN.
+	 "notes": "", //  Notes about the book.
+  }
+}
+```
+  <!-- END GENERATED DOCUMENTATION -->
