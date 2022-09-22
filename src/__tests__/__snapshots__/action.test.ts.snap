@@ -63,7 +63,8 @@ To trigger the action, [create a workflow dispatch event](https://docs.github.co
   }
 }
 \`\`\`
-  "
+
+"
 `;
 
 exports[`action works 2`] = `
@@ -141,7 +142,8 @@ To trigger the action, [create a workflow dispatch event](https://docs.github.co
   }
 }
 \`\`\`
-  <!-- END GENERATED DOCUMENTATION -->
+
+<!-- END GENERATED DOCUMENTATION -->
 ",
 ]
 `;

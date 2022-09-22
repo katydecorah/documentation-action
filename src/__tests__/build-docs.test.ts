@@ -86,7 +86,8 @@ describe("buildDocs", () => {
         }
       }
       \`\`\`
-        "
+
+      "
     `);
   });
   test("without inputs", () => {
@@ -151,7 +152,8 @@ describe("buildDocs", () => {
         }
       }
       \`\`\`
-        "
+
+      "
     `);
   });
 
