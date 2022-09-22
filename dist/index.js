@@ -2899,9 +2899,19 @@ ${doc}${comment.end}`;
 ;// CONCATENATED MODULE: ./src/format-inputs.ts
 function formatInputs(inputs) {
     const formattedInputs = Object.keys(inputs)
-        .map((key) => `- \`${key}\`: ${showRequired(inputs[key].required)}${inputs[key].description}${showDefault(inputs[key].default)}\n${showDeprecation(inputs[key].deprecationMessage)}\n`)
+        .map((key) => `- \`${key}\`: ${inputMetdata(inputs[key])}\n`)
         .join("");
     return formattedInputs;
+}
+function formatWorkflowInputs(inputs) {
+    return Object.keys(inputs)
+        .map((key) => {
+        return `"${key}": "", // ${inputMetdata(inputs[key])}`;
+    })
+        .join("\n    ");
+}
+function inputMetdata(input) {
+    return `${showRequired(input.required)}${input.description}${showDefault(input.default)}\n${showDeprecation(input.deprecationMessage)}`;
 }
 function showRequired(value) {
     return !value ? "" : "Required. ";
@@ -2916,32 +2926,37 @@ function showDeprecation(value) {
 ;// CONCATENATED MODULE: ./src/build-docs.ts
 
 function buildDocs({ workflow, action, release, }) {
-    let docs = `
+    let docs = documentSetup(workflow, release);
+    // Document inputs, if they exist
+    docs += documentActionInputs(action) || "";
+    // Document workflow inputs, if they exist
+    docs += documentWorkflowInputs(workflow.json) || "";
+    return docs;
+}
+function trimExampleWorkflow({ workflow, release }) {
+    return workflow.replace("uses: ./", `uses: ${release}`).trim();
+}
+function documentSetup(workflow, release) {
+    return `
 ## Set up the workflow
 
 To use this action, create a new workflow in \`.github/workflows\` and modify it as needed:
 
 \`\`\`yml
 ${trimExampleWorkflow({ workflow: workflow.yaml, release })}
-\`\`\``;
-    // Document inputs, if they exist
-    if ("inputs" in action) {
-        docs += `
+\`\`\`
+`;
+}
+function documentActionInputs(action) {
+    if (!action.inputs)
+        return;
+    return `
 
 ## Action options
 
 ${formatInputs(action.inputs)}`;
-    }
-    // Document workflow inputs, if they exist
-    if (workflowDispatchInputs(workflow.json)) {
-        docs += workflowDispatchInputs(workflow.json);
-    }
-    return docs;
 }
-function trimExampleWorkflow({ workflow, release }) {
-    return workflow.replace("uses: ./", `uses: ${release}`).trim();
-}
-function workflowDispatchInputs(workflow) {
+function documentWorkflowInputs(workflow) {
     if (!workflow.on.workflow_dispatch || !workflow.on.workflow_dispatch.inputs)
         return;
     return `## Trigger the action
@@ -2957,13 +2972,6 @@ To trigger the action, [create a workflow dispatch event](https://docs.github.co
 }
 \`\`\`
 `;
-}
-function formatWorkflowInputs(inputs) {
-    return Object.keys(inputs)
-        .map((key) => {
-        return `"${key}": "", // ${showRequired(inputs[key].required)} ${inputs[key].description}.`;
-    })
-        .join("\n    ");
 }
 
 ;// CONCATENATED MODULE: ./node_modules/js-yaml/dist/js-yaml.mjs

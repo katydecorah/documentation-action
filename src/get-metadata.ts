@@ -42,12 +42,16 @@ export type WorkflowConfig = {
   json: WorkflowJson;
 };
 
+export type Input = {
+  description: string;
+  required?: boolean;
+  type?: string;
+  default?: string;
+  deprecationMessage?: string;
+};
+
 export type Inputs = {
-  [key: string]: {
-    description: string;
-    required: boolean;
-    type: string;
-  };
+  [key: string]: Input;
 };
 
 export type WorkflowJson = {

@@ -9,10 +9,19 @@ const workflowYaml = readFileSync(
   "./.github/workflows/example.yml",
   "utf-8"
 ) as string;
+const workflowWithInputsYaml = readFileSync(
+  "./.github/workflows/example-with-inputs.yml",
+  "utf-8"
+) as string;
 
 const workflow: WorkflowConfig = {
   yaml: workflowYaml,
   json: load(workflowYaml) as WorkflowJson,
+};
+
+const workflowWithInputs: WorkflowConfig = {
+  yaml: workflowWithInputsYaml,
+  json: load(workflowWithInputsYaml) as WorkflowJson,
 };
 
 describe("buildDocs", () => {
@@ -57,6 +66,7 @@ describe("buildDocs", () => {
                 git commit -am "Update documentation"
                 git push
       \`\`\`
+
 
       ## Action options
 
@@ -107,38 +117,15 @@ describe("buildDocs", () => {
                 git config --local user.name "GitHub Action"
                 git commit -am "Update documentation"
                 git push
-      \`\`\`"
+      \`\`\`
+      "
     `);
   });
 
   test("with workflow inputs", () => {
     expect(
       buildDocs({
-        workflow: {
-          ...workflow,
-          json: {
-            ...workflow.json,
-            on: {
-              ...workflow.json.on,
-
-              workflow_dispatch: {
-                inputs: {
-                  bookIsbn: {
-                    description: "The book's ISBN",
-                    required: true,
-                    type: "string",
-                  },
-
-                  notes: {
-                    description: "Notes about the book",
-                    type: "string",
-                  },
-                },
-              },
-            },
-          },
-        },
-
+        workflow: workflowWithInputs,
         release: "katydecorah/documentation-action@v0.1.0",
         action,
       })
@@ -152,6 +139,15 @@ describe("buildDocs", () => {
       name: Document GitHub action
 
       on:
+        workflow_dispatch:
+          inputs:
+            bookIsbn:
+              description: The book's ISBN.
+              required: true
+              type: string
+            notes:
+              description: Notes about the book.
+              type: string
         push:
           paths:
             - ".github/workflows/example.yml"
@@ -177,6 +173,7 @@ describe("buildDocs", () => {
                 git push
       \`\`\`
 
+
       ## Action options
 
       - \`exampleWorkflowFile\`: The example workflow file in \`.github/workflows/\` Default: \`example.yml\`.
@@ -191,8 +188,10 @@ describe("buildDocs", () => {
       { 
         "ref": "main", // Required. The git reference for the workflow, a branch or tag name.
         "inputs": {
-          "bookIsbn": "", // Required.  The book's ISBN.
-          "notes": "", //  Notes about the book.
+          "bookIsbn": "", // Required. The book's ISBN.
+
+          "notes": "", // Notes about the book.
+
         }
       }
       \`\`\`

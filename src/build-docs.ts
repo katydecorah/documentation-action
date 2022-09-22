@@ -1,6 +1,6 @@
-import { formatInputs, showRequired } from "./format-inputs";
+import { formatInputs, formatWorkflowInputs } from "./format-inputs";
 import { ActionConfig } from "./action";
-import { Inputs, WorkflowConfig, WorkflowJson } from "./get-metadata";
+import { WorkflowConfig, WorkflowJson } from "./get-metadata";
 
 export function buildDocs({
   workflow,
@@ -11,27 +11,11 @@ export function buildDocs({
   action: ActionConfig;
   release: string;
 }): string {
-  let docs = `
-## Set up the workflow
-
-To use this action, create a new workflow in \`.github/workflows\` and modify it as needed:
-
-\`\`\`yml
-${trimExampleWorkflow({ workflow: workflow.yaml, release })}
-\`\`\``;
+  let docs = documentSetup(workflow, release);
   // Document inputs, if they exist
-  if ("inputs" in action) {
-    docs += `
-
-## Action options
-
-${formatInputs(action.inputs)}`;
-  }
-
+  docs += documentActionInputs(action) || "";
   // Document workflow inputs, if they exist
-  if (workflowDispatchInputs(workflow.json)) {
-    docs += workflowDispatchInputs(workflow.json);
-  }
+  docs += documentWorkflowInputs(workflow.json) || "";
   return docs;
 }
 
@@ -39,7 +23,28 @@ export function trimExampleWorkflow({ workflow, release }): string {
   return workflow.replace("uses: ./", `uses: ${release}`).trim();
 }
 
-export function workflowDispatchInputs(workflow: WorkflowJson) {
+function documentSetup(workflow: WorkflowConfig, release: string): string {
+  return `
+## Set up the workflow
+
+To use this action, create a new workflow in \`.github/workflows\` and modify it as needed:
+
+\`\`\`yml
+${trimExampleWorkflow({ workflow: workflow.yaml, release })}
+\`\`\`
+`;
+}
+
+function documentActionInputs(action: ActionConfig): string | undefined {
+  if (!action.inputs) return;
+  return `
+
+## Action options
+
+${formatInputs(action.inputs)}`;
+}
+
+function documentWorkflowInputs(workflow: WorkflowJson): string | undefined {
   if (!workflow.on.workflow_dispatch || !workflow.on.workflow_dispatch.inputs)
     return;
   return `## Trigger the action
@@ -55,14 +60,4 @@ To trigger the action, [create a workflow dispatch event](https://docs.github.co
 }
 \`\`\`
 `;
-}
-
-function formatWorkflowInputs(inputs: Inputs) {
-  return Object.keys(inputs)
-    .map((key) => {
-      return `"${key}": "", // ${showRequired(inputs[key].required)} ${
-        inputs[key].description
-      }.`;
-    })
-    .join("\n    ");
 }

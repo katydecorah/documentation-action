@@ -35,6 +35,7 @@ jobs:
           git push
 \`\`\`
 
+
 ## Action options
 
 - \`exampleWorkflowFile\`: The example workflow file in \`.github/workflows/\` Default: \`example.yml\`.
@@ -90,6 +91,7 @@ jobs:
           git commit -am "Update documentation"
           git push
 \`\`\`
+
 
 ## Action options
 
