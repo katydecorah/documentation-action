@@ -1,8 +1,9 @@
 import { formatInputs } from "../format-inputs";
 import { readFileSync } from "fs";
 import { load } from "js-yaml";
+import { ActionConfig } from "../action";
 
-const action = load(readFileSync("./action.yml", "utf-8"));
+const action = load(readFileSync("./action.yml", "utf-8")) as ActionConfig;
 
 describe("formatInputs", () => {
   test("generated from action.yml", () => {

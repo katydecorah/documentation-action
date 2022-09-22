@@ -21,7 +21,7 @@ export async function docs() {
     // Write docs
     await writeDocs(docs);
   } catch (error) {
-    setFailed(error.message);
+    setFailed(error);
   }
 }
 
@@ -43,7 +43,7 @@ export type ActionConfig = {
       /** A string description of the input parameter. */
       description: string;
       /** A boolean to indicate whether the action requires the input parameter. */
-      required: boolean;
+      required?: boolean;
       /** A string representing the default value. */
       default?: string;
       /** If the input parameter is used, this string is logged as a warning message. */

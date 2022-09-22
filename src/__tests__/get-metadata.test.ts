@@ -1,6 +1,5 @@
 import { getWorkflow, getActionConfig, getRelease } from "../get-metadata";
 import * as core from "@actions/core";
-import { setFailed } from "@actions/core";
 import { promises } from "fs";
 
 jest.mock("@actions/core");
@@ -16,9 +15,10 @@ describe("getWorkflow", () => {
     );
   });
   test("fails", async () => {
-    jest.spyOn(promises, "readFile").mockRejectedValue({ message: "Error" });
-    await getWorkflow();
-    expect(setFailed).toHaveBeenCalledWith("Error");
+    jest.spyOn(promises, "readFile").mockRejectedValue("Error");
+    return expect(getWorkflow()).rejects.toMatchInlineSnapshot(
+      `[Error: Error]`
+    );
   });
 });
 
@@ -29,9 +29,10 @@ describe("getActionConfig", () => {
     expect(readFileSpy).toHaveBeenCalledWith("./action.yml", "utf-8");
   });
   test("fails", async () => {
-    jest.spyOn(promises, "readFile").mockRejectedValue({ message: "Error" });
-    await getActionConfig();
-    expect(setFailed).toHaveBeenCalledWith("Error");
+    jest.spyOn(promises, "readFile").mockRejectedValue("Error");
+    return expect(getActionConfig()).rejects.toMatchInlineSnapshot(
+      `[Error: Error]`
+    );
   });
 });
 
@@ -47,7 +48,8 @@ describe("getRelease", () => {
   });
   test("fails", async () => {
     jest.spyOn(promises, "readFile").mockResolvedValueOnce("");
-    await getRelease();
-    expect(setFailed).toHaveBeenCalledWith("Unexpected end of JSON input");
+    return expect(getRelease()).rejects.toMatchInlineSnapshot(
+      `[Error: SyntaxError: Unexpected end of JSON input]`
+    );
   });
 });

@@ -1,6 +1,6 @@
 import { ActionConfig } from "./action";
 
-export function formatInputs(inputs: ActionConfig["inputs"]) {
+export function formatInputs(inputs: ActionConfig["inputs"]): string {
   const formattedInputs = Object.keys(inputs)
     .map(
       (key) =>
@@ -14,17 +14,14 @@ export function formatInputs(inputs: ActionConfig["inputs"]) {
   return formattedInputs;
 }
 
-function showRequired(value: boolean | undefined) {
-  if (!value) return "";
-  return "Required. ";
+function showRequired(value: boolean | undefined): string {
+  return !value ? "" : "Required. ";
 }
 
-function showDefault(value: string | undefined) {
-  if (!value) return "";
-  return ` Default: \`${value}\`.`;
+function showDefault(value: string | undefined): string {
+  return !value ? "" : ` Default: \`${value}\`.`;
 }
 
-function showDeprecation(value: string | undefined) {
-  if (!value) return "";
-  return ` Deprecation warning: \`${value}\``;
+function showDeprecation(value: string | undefined): string {
+  return !value ? "" : ` Deprecation warning: \`${value}\``;
 }

@@ -2904,19 +2904,13 @@ function formatInputs(inputs) {
     return formattedInputs;
 }
 function showRequired(value) {
-    if (!value)
-        return "";
-    return "Required. ";
+    return !value ? "" : "Required. ";
 }
 function showDefault(value) {
-    if (!value)
-        return "";
-    return ` Default: \`${value}\`.`;
+    return !value ? "" : ` Default: \`${value}\`.`;
 }
 function showDeprecation(value) {
-    if (!value)
-        return "";
-    return ` Deprecation warning: \`${value}\``;
+    return !value ? "" : ` Deprecation warning: \`${value}\``;
 }
 
 ;// CONCATENATED MODULE: ./src/build-docs.ts
@@ -6817,7 +6811,7 @@ function getWorkflow() {
             return yield (0,promises_namespaceObject.readFile)(`./.github/workflows/${exampleWorkflowFile}`, "utf-8");
         }
         catch (error) {
-            (0,core.setFailed)(error.message);
+            throw new Error(error);
         }
     });
 }
@@ -6828,7 +6822,7 @@ function getActionConfig() {
             return load(actionConfig);
         }
         catch (error) {
-            (0,core.setFailed)(error.message);
+            throw new Error(error);
         }
     });
 }
@@ -6839,7 +6833,7 @@ function getRelease() {
             return `${process.env.GITHUB_REPOSITORY}@v${version}`;
         }
         catch (error) {
-            (0,core.setFailed)(error.message);
+            throw new Error(error);
         }
     });
 }
@@ -6877,7 +6871,7 @@ function docs() {
             yield writeDocs(docs);
         }
         catch (error) {
-            (0,core.setFailed)(error.message);
+            (0,core.setFailed)(error);
         }
     });
 }

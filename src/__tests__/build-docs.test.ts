@@ -1,8 +1,9 @@
 import { buildDocs, trimExampleWorkflow } from "../build-docs";
 import { readFileSync } from "fs";
 import { load } from "js-yaml";
+import { ActionConfig } from "../action";
 
-const action = load(readFileSync("./action.yml", "utf-8"));
+const action = load(readFileSync("./action.yml", "utf-8")) as ActionConfig;
 const workflow = readFileSync("./.github/workflows/example.yml", "utf-8");
 
 describe("buildDocs", () => {

@@ -29,6 +29,6 @@ ${formatInputs(action.inputs)}`;
   return docs;
 }
 
-export function trimExampleWorkflow({ workflow, release }) {
+export function trimExampleWorkflow({ workflow, release }): string {
   return workflow.replace("uses: ./", `uses: ${release}`).trim();
 }
