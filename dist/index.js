@@ -2906,10 +2906,10 @@ function formatInputs(inputs) {
 function formatWorkflowInputs(inputs) {
     return Object.keys(inputs)
         .map((key) => `"${key}": "", // ${inputMetdata(inputs[key])}`)
-        .join("    ");
+        .join("\n    ");
 }
 function inputMetdata(input) {
-    return `${showRequired(input.required)}${input.description}${showDefault(input.default)}\n${showDeprecation(input.deprecationMessage)}`;
+    return `${showRequired(input.required)}${input.description}${showDefault(input.default)}${showDeprecation(input.deprecationMessage)}`;
 }
 function showRequired(value) {
     return !value ? "" : "Required. ";
@@ -2957,7 +2957,8 @@ ${formatInputs(action.inputs)}`;
 function documentWorkflowInputs(workflow) {
     if (!workflow.on.workflow_dispatch || !workflow.on.workflow_dispatch.inputs)
         return;
-    return `## Trigger the action
+    return `
+## Trigger the action
 
 To trigger the action, [create a workflow dispatch event](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event) with the following body parameters:
 

@@ -9,9 +9,7 @@ describe("formatInputs", () => {
   test("generated from action.yml", () => {
     expect(formatInputs(action.inputs)).toMatchInlineSnapshot(`
       "- \`exampleWorkflowFile\`: The example workflow file in \`.github/workflows/\` Default: \`example.yml\`.
-
       - \`documentationFile\`: The file where the action will write and update documentation for the action. Default: \`README.md\`.
-
       "
     `);
   });
@@ -33,9 +31,7 @@ describe("formatInputs", () => {
       })
     ).toMatchInlineSnapshot(`
       "- \`documentationFile\`: Required. The file where the action will write and update documentation for the action.
-
-      - \`docFile\`: The file where the action will write and update documentation for the action.
-       Deprecation warning: \`This input is now deprecated, use \`docFile\` instead.\`
+      - \`docFile\`: The file where the action will write and update documentation for the action. Deprecation warning: \`This input is now deprecated, use \`docFile\` instead.\`
       "
     `);
   });

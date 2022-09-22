@@ -11,13 +11,13 @@ export function formatInputs(inputs: ActionConfig["inputs"]): string {
 export function formatWorkflowInputs(inputs: Inputs): string {
   return Object.keys(inputs)
     .map((key) => `"${key}": "", // ${inputMetdata(inputs[key])}`)
-    .join("    ");
+    .join("\n    ");
 }
 
 function inputMetdata(input: Input): string {
   return `${showRequired(input.required)}${input.description}${showDefault(
     input.default
-  )}\n${showDeprecation(input.deprecationMessage)}`;
+  )}${showDeprecation(input.deprecationMessage)}`;
 }
 
 function showRequired(value: boolean | undefined): string {
