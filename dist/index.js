@@ -2922,7 +2922,7 @@ function buildDocs({ workflow, action, release, }) {
 To use this action, create a new workflow in \`.github/workflows\` and modify it as needed:
 
 \`\`\`yml
-${trimExampleWorkflow({ workflow, release })}
+${trimExampleWorkflow({ workflow: workflow.yaml, release })}
 \`\`\``;
     // Document inputs, if they exist
     if ("inputs" in action) {
@@ -2932,10 +2932,40 @@ ${trimExampleWorkflow({ workflow, release })}
 
 ${formatInputs(action.inputs)}`;
     }
+    // Document inputs, if they exist
+    if (workflowDispatchInputs(workflow.json)) {
+        docs += `
+
+## Trigger the workflow dispatch
+
+To trigger the action, you will [create a workflow dispatch event](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event) with the following body parameters:
+
+${workflowDispatchInputs(workflow.json)}`;
+    }
     return docs;
 }
 function trimExampleWorkflow({ workflow, release }) {
     return workflow.replace("uses: ./", `uses: ${release}`).trim();
+}
+function workflowDispatchInputs(workflow) {
+    if (!workflow.on.workflow_dispatch || !workflow.on.workflow_dispatch.inputs)
+        return;
+    return `\`\`\`json
+{ 
+  "ref": "main", // The git reference for the workflow, a branch or tag name.
+  "inputs": {
+    ${formatWorkflowInputs(workflow.on.workflow_dispatch.inputs)}
+  }
+}
+\`\`\`
+  `;
+}
+function formatWorkflowInputs(inputs) {
+    return Object.keys(inputs)
+        .map((key) => {
+        return `"${key}": "", // ${showRequired(inputs[key].required)} ${inputs[key].description}.`;
+    })
+        .join("\n\t ");
 }
 
 ;// CONCATENATED MODULE: ./node_modules/js-yaml/dist/js-yaml.mjs
@@ -6808,7 +6838,11 @@ function getWorkflow() {
     return get_metadata_awaiter(this, void 0, void 0, function* () {
         const exampleWorkflowFile = (0,core.getInput)("exampleWorkflowFile");
         try {
-            return yield (0,promises_namespaceObject.readFile)(`./.github/workflows/${exampleWorkflowFile}`, "utf-8");
+            const yaml = yield (0,promises_namespaceObject.readFile)(`./.github/workflows/${exampleWorkflowFile}`, "utf-8");
+            return {
+                yaml,
+                json: load(yaml),
+            };
         }
         catch (error) {
             throw new Error(error);

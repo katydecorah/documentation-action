@@ -14,7 +14,7 @@ export function formatInputs(inputs: ActionConfig["inputs"]): string {
   return formattedInputs;
 }
 
-function showRequired(value: boolean | undefined): string {
+export function showRequired(value: boolean | undefined): string {
   return !value ? "" : "Required. ";
 }
 
