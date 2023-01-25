@@ -66,7 +66,16 @@ describe("action", () => {
   });
 
   test("get metadata fails", async () => {
-    jest.spyOn(promises, "writeFile").mockImplementation();
+    jest
+      .spyOn(GetMetadata, "getWorkflow")
+      .mockReturnValueOnce(Promise.resolve(undefined));
+    jest
+      .spyOn(GetMetadata, "getActionConfig")
+      .mockReturnValueOnce(Promise.resolve(undefined));
+    jest
+      .spyOn(GetMetadata, "getRelease")
+      .mockReturnValueOnce(Promise.resolve(undefined));
+
     await docs();
     expect(setFailed).toHaveBeenCalledWith("Unable to get action metadata");
   });
