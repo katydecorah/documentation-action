@@ -1,15 +1,4 @@
-name: Document GitHub action (test)
-
-on:
-  workflow_dispatch:
-    inputs:
-      bookIsbn:
-        description: The book's ISBN.
-        required: true
-        type: string
-      notes:
-        description: Notes about the book.
-        type: string
+name: Document GitHub action (new feature)
 
 jobs:
   document_action:

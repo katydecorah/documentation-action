@@ -9,8 +9,9 @@ inputs:
   exampleWorkflowFile:
     description: The example workflow file in `.github/workflows/`
     default: example.yml
-    required: false
+  additionalWorkflowFilePrefix:
+    description: To include additional workflow files, save them with this prefix in `.github/workflow/`.
+    default: example
   documentationFile:
     description: The file where the action will write and update documentation for the action.
     default: README.md
-    required: false
