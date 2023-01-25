@@ -10,7 +10,7 @@ const workflowYaml = readFileSync(
   "utf-8"
 ) as string;
 const workflowWithInputsYaml = readFileSync(
-  "./.github/workflows/example-with-inputs.yml",
+  "./.github/workflows/test-with-inputs.yml",
   "utf-8"
 ) as string;
 
