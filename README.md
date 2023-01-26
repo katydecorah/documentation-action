@@ -47,6 +47,7 @@ jobs:
 
 <details>
 <summary>Document GitHub action (advanced)</summary>
+
 ```yml
 name: Document GitHub action (advanced)
 
@@ -68,9 +69,12 @@ jobs:
           git commit -am "Update documentation"
           git push
 ```
+
 </details>
+
 <details>
 <summary>Document GitHub action (new feature)</summary>
+
 ```yml
 name: Document GitHub action (new feature)
 
@@ -92,6 +96,7 @@ jobs:
           git commit -am "Update documentation"
           git push
 ```
+
 </details>
 
 
