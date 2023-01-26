@@ -31,6 +31,8 @@ export async function getWorkflows(): Promise<WorkflowConfig[] | undefined> {
         f.startsWith(additionalWorkflowFilePrefix) && f !== exampleWorkflowFile
     );
 
+    if (additionalWorkflows.length === 0) return undefined;
+
     const workflowArray: WorkflowConfig[] = [];
 
     for (const workflow of additionalWorkflows) {

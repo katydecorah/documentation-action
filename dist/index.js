@@ -6894,6 +6894,8 @@ function getWorkflows() {
         try {
             const workflows = yield (0,promises_namespaceObject.readdir)("./.github/workflows/");
             const additionalWorkflows = workflows.filter((f) => f.startsWith(additionalWorkflowFilePrefix) && f !== exampleWorkflowFile);
+            if (additionalWorkflows.length === 0)
+                return undefined;
             const workflowArray = [];
             for (const workflow of additionalWorkflows) {
                 const yaml = yield (0,promises_namespaceObject.readFile)(`./.github/workflows/${workflow}`, "utf-8");

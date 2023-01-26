@@ -61,6 +61,10 @@ describe("getWorkflows", () => {
       `[Error: Error]`
     );
   });
+  test("no additional workflow files", async () => {
+    jest.spyOn(promises, "readdir").mockResolvedValue(["example.yml"]);
+    return expect(getWorkflows()).resolves.toMatchInlineSnapshot(`undefined`);
+  });
 });
 
 describe("getActionConfig", () => {
