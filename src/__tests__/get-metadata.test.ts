@@ -1,22 +1,63 @@
-import { getWorkflow, getActionConfig, getRelease } from "../get-metadata";
+import {
+  getWorkflow,
+  getActionConfig,
+  getRelease,
+  getWorkflows,
+} from "../get-metadata";
 import * as core from "@actions/core";
 import { promises } from "fs";
 
 jest.mock("@actions/core");
 
+const defaultInputs = {
+  exampleWorkflowFile: "example.yml",
+  additionalWorkflowFilePrefix: "example",
+  documentationFile: "README.md",
+};
+
+beforeEach(() => {
+  jest
+    .spyOn(core, "getInput")
+    .mockImplementation((v) => defaultInputs[v] || undefined);
+});
+
 describe("getWorkflow", () => {
   test("works", async () => {
-    jest.spyOn(core, "getInput").mockImplementation(() => "README.md");
     const readFileSpy = jest.spyOn(promises, "readFile").mockImplementation();
     await getWorkflow();
     expect(readFileSpy).toHaveBeenCalledWith(
-      "./.github/workflows/README.md",
+      "./.github/workflows/example.yml",
       "utf-8"
     );
   });
   test("fails", async () => {
     jest.spyOn(promises, "readFile").mockRejectedValue("Error");
     return expect(getWorkflow()).rejects.toMatchInlineSnapshot(
+      `[Error: Error]`
+    );
+  });
+});
+
+describe("getWorkflows", () => {
+  test("works", async () => {
+    const readFileSpy = jest.spyOn(promises, "readFile").mockImplementation();
+    await getWorkflows();
+    expect(readFileSpy.mock.calls).toMatchInlineSnapshot(`
+      [
+        [
+          "./.github/workflows/example-advanced.yml",
+          "utf-8",
+        ],
+        [
+          "./.github/workflows/example-new-feature.yml",
+          "utf-8",
+        ],
+      ]
+    `);
+  });
+  test("fails", async () => {
+    jest.spyOn(promises, "readFile").mockRejectedValue("Error");
+    return expect(getWorkflows()).rejects.toMatchInlineSnapshot(
       `[Error: Error]`
     );
   });
