@@ -2938,8 +2938,10 @@ function showDeprecation(value) {
 
 ;// CONCATENATED MODULE: ./src/build-docs.ts
 
-function buildDocs({ workflow, action, release, }) {
+function buildDocs({ workflow, action, release, additionalWorkflows, }) {
     let docs = documentSetup(workflow, release);
+    if (additionalWorkflows)
+        docs += documentAdditionalWorkflows(additionalWorkflows, release);
     // Document inputs, if they exist
     docs += documentActionInputs(action) || "";
     // Document workflow inputs, if they exist
@@ -2957,7 +2959,23 @@ To use this action, create a new workflow in \`.github/workflows\` and modify it
 
 \`\`\`yml
 ${trimExampleWorkflow({ workflow: workflow.yaml, release })}
+\`\`\``;
+}
+function documentAdditionalWorkflows(additionalWorkflows, release) {
+    return `
+
+ ### Additional example workflows
+
+${additionalWorkflows
+        .map((workflow) => `<details>
+<summary>${workflow.json.name}</summary>
+
+\`\`\`yml
+${trimExampleWorkflow({ workflow: workflow.yaml, release })}
 \`\`\`
+
+</details>`)
+        .join("\n\n")}
 `;
 }
 function documentActionInputs(action) {
@@ -6869,6 +6887,30 @@ function getWorkflow() {
         }
     });
 }
+function getWorkflows() {
+    return get_metadata_awaiter(this, void 0, void 0, function* () {
+        const exampleWorkflowFile = (0,core.getInput)("exampleWorkflowFile");
+        const additionalWorkflowFilePrefix = (0,core.getInput)("additionalWorkflowFilePrefix");
+        try {
+            const workflows = yield (0,promises_namespaceObject.readdir)("./.github/workflows/");
+            const additionalWorkflows = workflows.filter((f) => f.startsWith(additionalWorkflowFilePrefix) && f !== exampleWorkflowFile);
+            if (additionalWorkflows.length === 0)
+                return undefined;
+            const workflowArray = [];
+            for (const workflow of additionalWorkflows) {
+                const yaml = yield (0,promises_namespaceObject.readFile)(`./.github/workflows/${workflow}`, "utf-8");
+                workflowArray.push({
+                    yaml,
+                    json: load(yaml),
+                });
+            }
+            return workflowArray;
+        }
+        catch (error) {
+            throw new Error(error);
+        }
+    });
+}
 function getActionConfig() {
     return get_metadata_awaiter(this, void 0, void 0, function* () {
         try {
@@ -6910,17 +6952,18 @@ function docs() {
     return action_awaiter(this, void 0, void 0, function* () {
         try {
             // Get workflow metadata
-            const [workflow, action, release] = yield Promise.all([
+            const [workflow, action, release, additionalWorkflows] = yield Promise.all([
                 getWorkflow(),
                 getActionConfig(),
                 getRelease(),
+                getWorkflows(),
             ]);
             if (!workflow || !action || !release) {
                 (0,core.setFailed)("Unable to get action metadata");
                 return;
             }
             // Build docs
-            const docs = buildDocs({ workflow, action, release });
+            const docs = buildDocs({ workflow, action, release, additionalWorkflows });
             // Write docs
             yield writeDocs(docs);
         }

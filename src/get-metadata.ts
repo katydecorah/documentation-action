@@ -1,4 +1,4 @@
-import { readFile } from "fs/promises";
+import { readFile, readdir } from "fs/promises";
 import { load } from "js-yaml";
 import { getInput } from "@actions/core";
 import { ActionConfig } from "./action";
@@ -14,6 +14,35 @@ export async function getWorkflow(): Promise<WorkflowConfig | undefined> {
       yaml,
       json: load(yaml) as WorkflowJson,
     };
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export async function getWorkflows(): Promise<WorkflowConfig[] | undefined> {
+  const exampleWorkflowFile: string = getInput("exampleWorkflowFile");
+  const additionalWorkflowFilePrefix: string = getInput(
+    "additionalWorkflowFilePrefix"
+  );
+  try {
+    const workflows = await readdir("./.github/workflows/");
+    const additionalWorkflows = workflows.filter(
+      (f) =>
+        f.startsWith(additionalWorkflowFilePrefix) && f !== exampleWorkflowFile
+    );
+
+    if (additionalWorkflows.length === 0) return undefined;
+
+    const workflowArray: WorkflowConfig[] = [];
+
+    for (const workflow of additionalWorkflows) {
+      const yaml = await readFile(`./.github/workflows/${workflow}`, "utf-8");
+      workflowArray.push({
+        yaml,
+        json: load(yaml) as WorkflowJson,
+      });
+    }
+    return workflowArray;
   } catch (error) {
     throw new Error(error);
   }

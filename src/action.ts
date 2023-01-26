@@ -1,15 +1,21 @@
 import { setFailed } from "@actions/core";
 import { writeDocs } from "./write-docs";
 import { buildDocs } from "./build-docs";
-import { getWorkflow, getActionConfig, getRelease } from "./get-metadata";
+import {
+  getWorkflow,
+  getActionConfig,
+  getRelease,
+  getWorkflows,
+} from "./get-metadata";
 
 export async function docs() {
   try {
     // Get workflow metadata
-    const [workflow, action, release] = await Promise.all([
+    const [workflow, action, release, additionalWorkflows] = await Promise.all([
       getWorkflow(),
       getActionConfig(),
       getRelease(),
+      getWorkflows(),
     ]);
 
     if (!workflow || !action || !release) {
@@ -17,7 +23,7 @@ export async function docs() {
       return;
     }
     // Build docs
-    const docs = buildDocs({ workflow, action, release });
+    const docs = buildDocs({ workflow, action, release, additionalWorkflows });
     // Write docs
     await writeDocs(docs);
   } catch (error) {

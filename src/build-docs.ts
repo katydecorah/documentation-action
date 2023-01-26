@@ -6,12 +6,16 @@ export function buildDocs({
   workflow,
   action,
   release,
+  additionalWorkflows,
 }: {
   workflow: WorkflowConfig;
   action: ActionConfig;
   release: string;
+  additionalWorkflows?: WorkflowConfig[];
 }): string {
   let docs = documentSetup(workflow, release);
+  if (additionalWorkflows)
+    docs += documentAdditionalWorkflows(additionalWorkflows, release);
   // Document inputs, if they exist
   docs += documentActionInputs(action) || "";
   // Document workflow inputs, if they exist
@@ -31,7 +35,29 @@ To use this action, create a new workflow in \`.github/workflows\` and modify it
 
 \`\`\`yml
 ${trimExampleWorkflow({ workflow: workflow.yaml, release })}
+\`\`\``;
+}
+
+function documentAdditionalWorkflows(
+  additionalWorkflows: WorkflowConfig[],
+  release: string
+): string {
+  return `
+
+ ### Additional example workflows
+
+${additionalWorkflows
+  .map(
+    (workflow) => `<details>
+<summary>${workflow.json.name}</summary>
+
+\`\`\`yml
+${trimExampleWorkflow({ workflow: workflow.yaml, release })}
 \`\`\`
+
+</details>`
+  )
+  .join("\n\n")}
 `;
 }
 
