@@ -50,6 +50,8 @@ jobs:
 
 ```yml
 name: Document GitHub action (advanced)
+# This workflow file is the same as example.yml
+# It's a proof of concept that you provide additional workflow files and they will appear in the README.
 
 jobs:
   document_action:
@@ -77,6 +79,8 @@ jobs:
 
 ```yml
 name: Document GitHub action (new feature)
+# This workflow file is the same as example.yml
+# It's a proof of concept that you provide additional workflow files and they will appear in the README.
 
 jobs:
   document_action:
