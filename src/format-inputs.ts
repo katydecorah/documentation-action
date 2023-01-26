@@ -4,7 +4,7 @@ import { Input, Inputs } from "./get-metadata";
 export function formatInputs(inputs: ActionConfig["inputs"]): string {
   const formattedInputs = Object.keys(inputs)
     .map((key) => `- \`${key}\`: ${inputMetdata(inputs[key])}\n`)
-    .join("");
+    .join("\n");
   return formattedInputs;
 }
 

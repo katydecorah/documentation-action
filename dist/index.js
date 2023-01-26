@@ -2915,7 +2915,7 @@ ${doc}${comment.end}`;
 function formatInputs(inputs) {
     const formattedInputs = Object.keys(inputs)
         .map((key) => `- \`${key}\`: ${inputMetdata(inputs[key])}\n`)
-        .join("");
+        .join("\n");
     return formattedInputs;
 }
 function formatWorkflowInputs(inputs) {
