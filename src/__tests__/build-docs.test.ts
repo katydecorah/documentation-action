@@ -42,6 +42,7 @@ describe("buildDocs", () => {
       name: Document GitHub action
 
       on:
+        workflow_dispatch:
         push:
           paths:
             - ".github/workflows/example.yml"
@@ -95,6 +96,7 @@ describe("buildDocs", () => {
       name: Document GitHub action
 
       on:
+        workflow_dispatch:
         push:
           paths:
             - ".github/workflows/example.yml"
@@ -205,6 +207,7 @@ test("trimExampleWorkflow", () => {
     "name: Document GitHub action
 
     on:
+      workflow_dispatch:
       push:
         paths:
           - ".github/workflows/example.yml"

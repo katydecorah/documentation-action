@@ -10,6 +10,7 @@ To use this action, create a new workflow in \`.github/workflows\` and modify it
 name: Document GitHub action
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - ".github/workflows/example.yml"
@@ -68,6 +69,7 @@ To use this action, create a new workflow in \`.github/workflows\` and modify it
 name: Document GitHub action
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - ".github/workflows/example.yml"
@@ -116,6 +118,7 @@ To use this action, create a new workflow in \`.github/workflows\` and modify it
 name: Document GitHub action
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - ".github/workflows/example.yml"
@@ -235,6 +238,7 @@ To use this action, create a new workflow in \`.github/workflows\` and modify it
 name: Document GitHub action
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - ".github/workflows/example.yml"
