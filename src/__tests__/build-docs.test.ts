@@ -41,6 +41,9 @@ describe("buildDocs", () => {
       \`\`\`yml
       name: Document GitHub action
 
+      permissions:
+        contents: write
+
       on:
         workflow_dispatch:
         push:
@@ -94,6 +97,9 @@ describe("buildDocs", () => {
 
       \`\`\`yml
       name: Document GitHub action
+
+      permissions:
+        contents: write
 
       on:
         workflow_dispatch:
@@ -205,6 +211,9 @@ test("trimExampleWorkflow", () => {
     })
   ).toMatchInlineSnapshot(`
     "name: Document GitHub action
+
+    permissions:
+      contents: write
 
     on:
       workflow_dispatch:
