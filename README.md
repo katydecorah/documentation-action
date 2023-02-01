@@ -16,6 +16,9 @@ To use this action, create a new workflow in `.github/workflows` and modify it a
 ```yml
 name: Document GitHub action
 
+permissions:
+  contents: write
+
 on:
   workflow_dispatch:
   push:
@@ -54,6 +57,9 @@ name: Document GitHub action (advanced)
 # This workflow file is the same as example.yml
 # It's a proof of concept that you provide additional workflow files and they will appear in the README.
 
+permissions:
+  contents: write
+
 jobs:
   document_action:
     runs-on: macOS-latest
@@ -82,6 +88,9 @@ jobs:
 name: Document GitHub action (new feature)
 # This workflow file is the same as example.yml
 # It's a proof of concept that you provide additional workflow files and they will appear in the README.
+
+permissions:
+  contents: write
 
 jobs:
   document_action:
