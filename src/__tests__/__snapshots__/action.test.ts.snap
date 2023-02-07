@@ -220,7 +220,6 @@ jobs:
 
 </details>
 
-
 ## Action options
 
 - \`exampleWorkflowFile\`: The example workflow file in \`.github/workflows/\` Default: \`example.yml\`.
@@ -348,7 +347,6 @@ jobs:
 \`\`\`
 
 </details>
-
 
 ## Action options
 

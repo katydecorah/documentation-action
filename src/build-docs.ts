@@ -57,8 +57,7 @@ ${trimExampleWorkflow({ workflow: workflow.yaml, release })}
 
 </details>`
   )
-  .join("\n\n")}
-`;
+  .join("\n\n")}`;
 }
 
 function documentActionInputs(action: ActionConfig): string | undefined {
