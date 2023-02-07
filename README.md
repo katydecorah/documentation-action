@@ -47,7 +47,7 @@ jobs:
           git push
 ```
 
- ### Additional example workflows
+### Additional example workflows
 
 <details>
 <summary>Document GitHub action (advanced)</summary>
@@ -112,7 +112,6 @@ jobs:
 ```
 
 </details>
-
 
 ## Action options
 

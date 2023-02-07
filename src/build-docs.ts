@@ -44,7 +44,7 @@ function documentAdditionalWorkflows(
 ): string {
   return `
 
- ### Additional example workflows
+### Additional example workflows
 
 ${additionalWorkflows
   .map(
@@ -57,8 +57,7 @@ ${trimExampleWorkflow({ workflow: workflow.yaml, release })}
 
 </details>`
   )
-  .join("\n\n")}
-`;
+  .join("\n\n")}`;
 }
 
 function documentActionInputs(action: ActionConfig): string | undefined {
