@@ -44,7 +44,7 @@ function documentAdditionalWorkflows(
 ): string {
   return `
 
- ### Additional example workflows
+### Additional example workflows
 
 ${additionalWorkflows
   .map(
