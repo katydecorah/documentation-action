@@ -37,9 +37,9 @@ const workflows = [
 ];
 
 const defaultInputs = {
-  exampleWorkflowFile: "example.yml",
-  additionalWorkflowFilePrefix: "example",
-  documentationFile: "README.md",
+  "example-workflow": "example.yml",
+  "additional-workflow-prefix": "example",
+  "documentation-file": "README.md",
 };
 
 beforeEach(() => {

@@ -74,11 +74,11 @@ describe("buildDocs", () => {
 
       ## Action options
 
-      - \`exampleWorkflowFile\`: The example workflow file in \`.github/workflows/\` Default: \`example.yml\`.
+      - \`example-workflow\`: The example workflow file in \`.github/workflows/\` Default: \`example.yml\`.
 
-      - \`additionalWorkflowFilePrefix\`: To include additional workflow files, save them with this prefix in \`.github/workflow/\`. Default: \`example\`.
+      - \`additional-workflow-prefix\`: To include additional workflow files, save them with this prefix in \`.github/workflow/\`. Default: \`example\`.
 
-      - \`documentationFile\`: The file where the action will write and update documentation for the action. Default: \`README.md\`.
+      - \`documentation-file\`: The file where the action will write and update documentation for the action. Default: \`README.md\`.
       "
     `);
   });
@@ -179,11 +179,11 @@ describe("buildDocs", () => {
 
       ## Action options
 
-      - \`exampleWorkflowFile\`: The example workflow file in \`.github/workflows/\` Default: \`example.yml\`.
+      - \`example-workflow\`: The example workflow file in \`.github/workflows/\` Default: \`example.yml\`.
 
-      - \`additionalWorkflowFilePrefix\`: To include additional workflow files, save them with this prefix in \`.github/workflow/\`. Default: \`example\`.
+      - \`additional-workflow-prefix\`: To include additional workflow files, save them with this prefix in \`.github/workflow/\`. Default: \`example\`.
 
-      - \`documentationFile\`: The file where the action will write and update documentation for the action. Default: \`README.md\`.
+      - \`documentation-file\`: The file where the action will write and update documentation for the action. Default: \`README.md\`.
 
       ## Trigger the action
 
