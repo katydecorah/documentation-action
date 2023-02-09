@@ -36,7 +36,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Documentation action
-        uses: katydecorah/documentation-action@v0.4.0
+        uses: katydecorah/documentation-action@v1.0.0
       - name: Commit files
         if: env.UpdateDocumentation == 'true'
         run: |
@@ -68,7 +68,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Documentation action
-        uses: katydecorah/documentation-action@v0.4.0
+        uses: katydecorah/documentation-action@v1.0.0
       - name: Commit files
         if: env.UpdateDocumentation == 'true'
         run: |
@@ -100,7 +100,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Documentation action
-        uses: katydecorah/documentation-action@v0.4.0
+        uses: katydecorah/documentation-action@v1.0.0
       - name: Commit files
         if: env.UpdateDocumentation == 'true'
         run: |
