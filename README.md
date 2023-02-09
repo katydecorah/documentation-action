@@ -36,9 +36,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Documentation action
+        id: documentation
         uses: katydecorah/documentation-action@v1.0.0
       - name: Commit files
-        if: env.UpdateDocumentation == 'true'
+        if: steps.documentation.outputs.update == 'true'
         run: |
           git pull
           git config --local user.email "action@github.com"
@@ -68,9 +69,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Documentation action
+        id: documentation
         uses: katydecorah/documentation-action@v1.0.0
       - name: Commit files
-        if: env.UpdateDocumentation == 'true'
+        if: steps.documentation.outputs.update == 'true'
         run: |
           git pull
           git config --local user.email "action@github.com"
@@ -100,9 +102,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Documentation action
+        id: documentation
         uses: katydecorah/documentation-action@v1.0.0
       - name: Commit files
-        if: env.UpdateDocumentation == 'true'
+        if: steps.documentation.outputs.update == 'true'
         run: |
           git pull
           git config --local user.email "action@github.com"
