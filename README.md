@@ -1,6 +1,6 @@
 # documentation-action
 
-A GitHub action to help document your GitHub actions.
+A GitHub action to document your GitHub action.
 
 To use this action, create two workflow files:
 
