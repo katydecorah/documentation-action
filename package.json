@@ -3,10 +3,11 @@
   "version": "0.4.0",
   "description": "A GitHub action to help document your GitHub actions.",
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
     "pretest": "eslint . --ext .js,.mjs,.ts",
     "test": "jest --coverage",
-    "build": "ncc build src/index.ts --minify",
+    "build": "ncc build src/index.ts",
     "prepare": "husky install",
     "pretty-quick": "pretty-quick"
   },
