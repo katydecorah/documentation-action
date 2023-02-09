@@ -4,10 +4,10 @@ import { getInput } from "@actions/core";
 import { ActionConfig } from "./action";
 
 export async function getWorkflow(): Promise<WorkflowConfig | undefined> {
-  const exampleWorkflow: string = getInput("example-workflow-file");
+  const exampleWorkflowFile: string = getInput("example-workflow-file");
   try {
     const yaml = await readFile(
-      `./.github/workflows/${exampleWorkflow}`,
+      `./.github/workflows/${exampleWorkflowFile}`,
       "utf-8"
     );
     return {
@@ -20,14 +20,15 @@ export async function getWorkflow(): Promise<WorkflowConfig | undefined> {
 }
 
 export async function getWorkflows(): Promise<WorkflowConfig[] | undefined> {
-  const exampleWorkflow: string = getInput("example-workflow-file");
-  const additionalWorkflowPrefix: string = getInput(
-    "additional-workflow-prefix"
+  const exampleWorkflowFile: string = getInput("example-workflow-file");
+  const additionalWorkflowFilePrefix: string = getInput(
+    "additional-workflow-file-prefix"
   );
   try {
     const workflows = await readdir("./.github/workflows/");
     const additionalWorkflows = workflows.filter(
-      (f) => f.startsWith(additionalWorkflowPrefix) && f !== exampleWorkflow
+      (f) =>
+        f.startsWith(additionalWorkflowFilePrefix) && f !== exampleWorkflowFile
     );
 
     if (additionalWorkflows.length === 0) return undefined;

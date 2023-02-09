@@ -9,7 +9,7 @@ inputs:
   example-workflow-file:
     description: The example workflow file in `.github/workflows/`
     default: example.yml
-  additional-workflow-prefix:
+  additional-workflow-file-prefix:
     description: To include additional workflow files, save them with this prefix in `.github/workflow/`.
     default: example
   documentation-file:
