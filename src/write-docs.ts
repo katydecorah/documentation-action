@@ -1,4 +1,4 @@
-import { exportVariable, setFailed, getInput } from "@actions/core";
+import { setFailed, getInput, setOutput } from "@actions/core";
 import { readFile, writeFile } from "fs/promises";
 
 export async function writeDocs(doc: string): Promise<void> {
@@ -22,7 +22,7 @@ export async function writeDocs(doc: string): Promise<void> {
     newFile = readme.replace(oldFile[0].toString(), preparedDocs);
     // If there are no changes to documentation, return early.
     if (oldFile[0].toString() === preparedDocs) {
-      exportVariable("UpdateDocumentation", false);
+      setOutput("update", "false");
       return;
     }
   } else {
@@ -32,7 +32,7 @@ export async function writeDocs(doc: string): Promise<void> {
 ${preparedDocs}
 `;
   }
-  exportVariable("UpdateDocumentation", true);
+  setOutput("update", "true");
   await writeFile(`./${documentationFile}`, newFile);
 }
 
