@@ -6,7 +6,7 @@ runs:
   main: dist/index.js
 
 inputs:
-  example-workflow:
+  example-workflow-file:
     description: The example workflow file in `.github/workflows/`
     default: example.yml
   additional-workflow-prefix:

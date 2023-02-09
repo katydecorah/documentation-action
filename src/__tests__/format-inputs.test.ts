@@ -8,7 +8,7 @@ const action = load(readFileSync("./action.yml", "utf-8")) as ActionConfig;
 describe("formatInputs", () => {
   test("generated from action.yml", () => {
     expect(formatInputs(action.inputs)).toMatchInlineSnapshot(`
-      "- \`example-workflow\`: The example workflow file in \`.github/workflows/\` Default: \`example.yml\`.
+      "- \`example-workflow-file\`: The example workflow file in \`.github/workflows/\` Default: \`example.yml\`.
 
       - \`additional-workflow-prefix\`: To include additional workflow files, save them with this prefix in \`.github/workflow/\`. Default: \`example\`.
 

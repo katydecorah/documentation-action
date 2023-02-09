@@ -4,7 +4,7 @@ import { getInput } from "@actions/core";
 import { ActionConfig } from "./action";
 
 export async function getWorkflow(): Promise<WorkflowConfig | undefined> {
-  const exampleWorkflow: string = getInput("example-workflow");
+  const exampleWorkflow: string = getInput("example-workflow-file");
   try {
     const yaml = await readFile(
       `./.github/workflows/${exampleWorkflow}`,
@@ -20,7 +20,7 @@ export async function getWorkflow(): Promise<WorkflowConfig | undefined> {
 }
 
 export async function getWorkflows(): Promise<WorkflowConfig[] | undefined> {
-  const exampleWorkflow: string = getInput("example-workflow");
+  const exampleWorkflow: string = getInput("example-workflow-file");
   const additionalWorkflowPrefix: string = getInput(
     "additional-workflow-prefix"
   );

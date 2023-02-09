@@ -37,7 +37,7 @@ const workflows = [
 ];
 
 const defaultInputs = {
-  "example-workflow": "example.yml",
+  "example-workflow-file": "example.yml",
   "additional-workflow-prefix": "example",
   "documentation-file": "README.md",
 };
