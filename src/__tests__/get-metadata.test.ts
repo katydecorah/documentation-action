@@ -10,9 +10,9 @@ import { promises } from "fs";
 jest.mock("@actions/core");
 
 const defaultInputs = {
-  exampleWorkflowFile: "example.yml",
-  additionalWorkflowFilePrefix: "example",
-  documentationFile: "README.md",
+  "example-workflow-file": "example.yml",
+  "additional-workflow-file-prefix": "example",
+  "documentation-file": "README.md",
 };
 
 beforeEach(() => {

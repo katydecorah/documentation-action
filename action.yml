@@ -6,12 +6,12 @@ runs:
   main: dist/index.js
 
 inputs:
-  exampleWorkflowFile:
+  example-workflow-file:
     description: The example workflow file in `.github/workflows/`
     default: example.yml
-  additionalWorkflowFilePrefix:
+  additional-workflow-file-prefix:
     description: To include additional workflow files, save them with this prefix in `.github/workflow/`.
     default: example
-  documentationFile:
+  documentation-file:
     description: The file where the action will write and update documentation for the action.
     default: README.md

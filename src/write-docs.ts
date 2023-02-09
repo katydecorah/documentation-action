@@ -2,7 +2,7 @@ import { exportVariable, setFailed, getInput } from "@actions/core";
 import { readFile, writeFile } from "fs/promises";
 
 export async function writeDocs(doc: string): Promise<void> {
-  const documentationFile: string = getInput("documentationFile");
+  const documentationFile: string = getInput("documentation-file");
   const readme = await readFile(`./${documentationFile}`, "utf-8");
   if (!readme) {
     setFailed(`Could not read the documentation file: ${documentationFile}`);
