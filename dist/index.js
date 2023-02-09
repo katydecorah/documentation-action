@@ -2840,7 +2840,7 @@ function writeDocs(doc) {
             newFile = readme.replace(oldFile[0].toString(), preparedDocs);
             // If there are no changes to documentation, return early.
             if (oldFile[0].toString() === preparedDocs) {
-                (0,core.exportVariable)("UpdateDocumentation", false);
+                (0,core.setOutput)("update", "false");
                 return;
             }
         }
@@ -2851,7 +2851,7 @@ function writeDocs(doc) {
 ${preparedDocs}
 `;
         }
-        (0,core.exportVariable)("UpdateDocumentation", true);
+        (0,core.setOutput)("update", "true");
         yield (0,promises_namespaceObject.writeFile)(`./${documentationFile}`, newFile);
     });
 }

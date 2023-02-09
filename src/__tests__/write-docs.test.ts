@@ -1,6 +1,6 @@
 import { writeDocs } from "../write-docs";
 import { promises } from "fs";
-import { exportVariable, setFailed } from "@actions/core";
+import { setOutput, setFailed } from "@actions/core";
 import * as core from "@actions/core";
 
 jest.mock("@actions/core");
@@ -50,7 +50,7 @@ Hello!
       <!-- END GENERATED DOCUMENTATION -->",
       ]
     `);
-    expect(exportVariable).toHaveBeenCalledWith("UpdateDocumentation", true);
+    expect(setOutput).toHaveBeenCalledWith("update", "true");
   });
 
   test("without comments", async () => {
@@ -78,7 +78,7 @@ Hello!
       ",
       ]
     `);
-    expect(exportVariable).toHaveBeenCalledWith("UpdateDocumentation", true);
+    expect(setOutput).toHaveBeenCalledWith("update", "true");
   });
 
   test("no changes", async () => {
@@ -91,7 +91,7 @@ A GitHub action to help document your GitHub actions.
     const writeMock = jest.spyOn(promises, "writeFile").mockImplementation();
     await writeDocs(`## Set up the workflow`);
     expect(writeMock).not.toHaveBeenCalled();
-    expect(exportVariable).toHaveBeenCalledWith("UpdateDocumentation", false);
+    expect(setOutput).toHaveBeenCalledWith("update", "false");
   });
 
   test("can't find file", async () => {
