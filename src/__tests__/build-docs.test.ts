@@ -45,6 +45,7 @@ describe("buildDocs", () => {
         contents: write
 
       on:
+        workflow_dispatch:
         push:
           paths:
             - ".github/workflows/example.yml"
@@ -102,6 +103,7 @@ describe("buildDocs", () => {
         contents: write
 
       on:
+        workflow_dispatch:
         push:
           paths:
             - ".github/workflows/example.yml"
@@ -218,6 +220,7 @@ test("trimExampleWorkflow", () => {
       contents: write
 
     on:
+      workflow_dispatch:
       push:
         paths:
           - ".github/workflows/example.yml"
