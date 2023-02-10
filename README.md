@@ -22,6 +22,14 @@ permissions:
 
 on:
   workflow_dispatch:
+    inputs:
+      bookIsbn:
+        description: The book's ISBN.
+        required: true
+        type: string
+      notes:
+        description: Notes about the book.
+        type: string
   push:
     paths:
       - ".github/workflows/example.yml"
@@ -124,4 +132,18 @@ jobs:
 - `additional-workflow-file-prefix`: To include additional workflow files, save them with this prefix in `.github/workflow/`. Default: `example`.
 
 - `documentation-file`: The file where the action will write and update documentation for the action. Default: `README.md`.
+
+## Trigger the action
+
+To trigger the action, [create a workflow dispatch event](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event) with the following body parameters:
+
+```js
+{
+  "ref": "main", // Required. The git reference for the workflow, a branch or tag name.
+  "inputs": {
+    "bookIsbn": "", // Required. The book's ISBN.
+    "notes": "", // Notes about the book.
+  }
+}
+```
 <!-- END GENERATED DOCUMENTATION -->
