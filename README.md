@@ -21,6 +21,7 @@ permissions:
   contents: write
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - ".github/workflows/example.yml"
