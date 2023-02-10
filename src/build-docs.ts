@@ -78,12 +78,13 @@ function documentWorkflowInputs(workflow: WorkflowJson): string | undefined {
 To trigger the action, [create a workflow dispatch event](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event) with the following body parameters:
 
 \`\`\`js
-{ 
+{
   "ref": "main", // Required. The git reference for the workflow, a branch or tag name.
   "inputs": {
     ${formatWorkflowInputs(workflow.on.workflow_dispatch.inputs)}
   }
 }
 \`\`\`
+
 `;
 }
