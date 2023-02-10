@@ -1,6 +1,12 @@
 name: Test
 
-on: push
+on:
+  workflow_dispatch:
+    inputs:
+      isbn:
+        description: The book's ISBN. Required.
+        required: true
+        type: string
 
 jobs:
   build:
