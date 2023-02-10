@@ -85,5 +85,6 @@ To trigger the action, [create a workflow dispatch event](https://docs.github.co
   }
 }
 \`\`\`
+
 `;
 }
