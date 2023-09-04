@@ -2,7 +2,7 @@ name: GitHub Action Documentation
 author: "@katydecorah"
 description: "A GitHub action to help document your GitHub action."
 runs:
-  using: "node16"
+  using: node20
   main: dist/index.js
 
 inputs:
