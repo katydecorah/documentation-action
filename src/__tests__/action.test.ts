@@ -49,6 +49,9 @@ beforeEach(() => {
 });
 
 describe("action", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
   test("works", async () => {
     const writeFileSpy = jest.spyOn(promises, "writeFile").mockImplementation();
     const getWorkflowSpy = jest
