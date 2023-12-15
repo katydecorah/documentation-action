@@ -26568,10 +26568,10 @@ function buildDocs({ workflow, action, release, additionalWorkflows, }) {
         docs += documentAdditionalWorkflows(additionalWorkflows, release);
     // Document inputs, if they exist
     docs += documentActionInputs(action) || "";
-    // Document outputs, if they exist
-    docs += documentActionOutputs(action) || "";
     // Document workflow inputs, if they exist
     docs += documentWorkflowInputs(workflow.json) || "";
+    // Document outputs, if they exist
+    docs += documentActionOutputs(action) || "";
     return docs;
 }
 function trimExampleWorkflow({ workflow, release }) {
