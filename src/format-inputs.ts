@@ -8,6 +8,13 @@ export function formatInputs(inputs: ActionConfig["inputs"]): string {
   return formattedInputs;
 }
 
+export function formatOutputs(outputs: ActionConfig["outputs"]): string {
+  const formattedInputs = Object.keys(outputs)
+    .map((key) => `- \`${key}\`: ${inputMetdata(outputs[key])}\n`)
+    .join("\n");
+  return formattedInputs;
+}
+
 export function formatWorkflowInputs(inputs: Inputs): string {
   return Object.keys(inputs)
     .map((key) => `"${key}": "", // ${inputMetdata(inputs[key])}`)

@@ -80,6 +80,11 @@ describe("buildDocs", () => {
       - \`additional-workflow-file-prefix\`: To include additional workflow files, save them with this prefix in \`.github/workflow/\`. Default: \`example\`.
 
       - \`documentation-file\`: The file where the action will write and update documentation for the action. Default: \`README.md\`.
+
+
+      ## Action outputs
+
+      - \`update\`: If true, the action updated the documentation file.
       "
     `);
   });
@@ -202,6 +207,11 @@ describe("buildDocs", () => {
       }
       \`\`\`
 
+
+
+      ## Action outputs
+
+      - \`update\`: If true, the action updated the documentation file.
       "
     `);
   });
