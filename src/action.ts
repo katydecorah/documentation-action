@@ -56,4 +56,10 @@ export type ActionConfig = {
       deprecationMessage?: string;
     };
   };
+  outputs: {
+    [input: string]: {
+      description: string;
+      value: string;
+    };
+  };
 };

@@ -26536,6 +26536,12 @@ function formatInputs(inputs) {
         .join("\n");
     return formattedInputs;
 }
+function formatOutputs(outputs) {
+    const formattedInputs = Object.keys(outputs)
+        .map((key) => `- \`${key}\`: ${inputMetdata(outputs[key])}\n`)
+        .join("\n");
+    return formattedInputs;
+}
 function formatWorkflowInputs(inputs) {
     return Object.keys(inputs)
         .map((key) => `"${key}": "", // ${inputMetdata(inputs[key])}`)
@@ -26564,6 +26570,8 @@ function buildDocs({ workflow, action, release, additionalWorkflows, }) {
     docs += documentActionInputs(action) || "";
     // Document workflow inputs, if they exist
     docs += documentWorkflowInputs(workflow.json) || "";
+    // Document outputs, if they exist
+    docs += documentActionOutputs(action) || "";
     return docs;
 }
 function trimExampleWorkflow({ workflow, release }) {
@@ -26603,6 +26611,15 @@ function documentActionInputs(action) {
 ## Action options
 
 ${formatInputs(action.inputs)}`;
+}
+function documentActionOutputs(action) {
+    if (!action.outputs)
+        return;
+    return `
+
+## Action outputs
+
+${formatOutputs(action.outputs)}`;
 }
 function documentWorkflowInputs(workflow) {
     if (!workflow.on.workflow_dispatch || !workflow.on.workflow_dispatch.inputs)

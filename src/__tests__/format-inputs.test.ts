@@ -1,9 +1,18 @@
-import { formatInputs } from "../format-inputs";
+import { formatInputs, formatOutputs } from "../format-inputs";
 import { readFileSync } from "fs";
 import { load } from "js-yaml";
 import { ActionConfig } from "../action";
 
 const action = load(readFileSync("./action.yml", "utf-8")) as ActionConfig;
+
+describe("formatOutputs", () => {
+  test("generated from action.yml", () => {
+    expect(formatOutputs(action.outputs)).toMatchInlineSnapshot(`
+      "- \`update\`: If true, the action updated the documentation file.
+      "
+    `);
+  });
+});
 
 describe("formatInputs", () => {
   test("generated from action.yml", () => {

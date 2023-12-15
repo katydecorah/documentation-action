@@ -1,4 +1,8 @@
-import { formatInputs, formatWorkflowInputs } from "./format-inputs";
+import {
+  formatInputs,
+  formatOutputs,
+  formatWorkflowInputs,
+} from "./format-inputs";
 import { ActionConfig } from "./action";
 import { WorkflowConfig, WorkflowJson } from "./get-metadata";
 
@@ -20,6 +24,8 @@ export function buildDocs({
   docs += documentActionInputs(action) || "";
   // Document workflow inputs, if they exist
   docs += documentWorkflowInputs(workflow.json) || "";
+  // Document outputs, if they exist
+  docs += documentActionOutputs(action) || "";
   return docs;
 }
 
@@ -67,6 +73,15 @@ function documentActionInputs(action: ActionConfig): string | undefined {
 ## Action options
 
 ${formatInputs(action.inputs)}`;
+}
+
+function documentActionOutputs(action: ActionConfig): string | undefined {
+  if (!action.outputs) return;
+  return `
+
+## Action outputs
+
+${formatOutputs(action.outputs)}`;
 }
 
 function documentWorkflowInputs(workflow: WorkflowJson): string | undefined {

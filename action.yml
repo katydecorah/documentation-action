@@ -15,3 +15,7 @@ inputs:
   documentation-file:
     description: The file where the action will write and update documentation for the action.
     default: README.md
+
+outputs:
+  update:
+    description: If true, the action updated the documentation file.
