@@ -37,7 +37,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Documentation action
         id: documentation
-        uses: katydecorah/documentation-action@v1.3.0
+        uses: katydecorah/documentation-action@v1.4.0
       - name: Commit files
         if: steps.documentation.outputs.update == 'true'
         run: |
@@ -70,7 +70,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Documentation action
         id: documentation
-        uses: katydecorah/documentation-action@v1.3.0
+        uses: katydecorah/documentation-action@v1.4.0
       - name: Commit files
         if: steps.documentation.outputs.update == 'true'
         run: |
@@ -103,7 +103,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Documentation action
         id: documentation
-        uses: katydecorah/documentation-action@v1.3.0
+        uses: katydecorah/documentation-action@v1.4.0
       - name: Commit files
         if: steps.documentation.outputs.update == 'true'
         run: |
