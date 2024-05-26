@@ -1,4 +1,6 @@
-const config = {
+import type { Config } from "jest";
+
+const config: Config = {
   resetMocks: true,
   clearMocks: true,
   coverageThreshold: {
@@ -12,4 +14,4 @@ const config = {
   prettierPath: require.resolve("prettier-2"),
 };
 
-module.exports = config;
+export default config;
