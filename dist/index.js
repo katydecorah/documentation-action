@@ -26749,23 +26749,23 @@ ${doc}${comment.end}`;
 ;// CONCATENATED MODULE: ./src/format-inputs.ts
 function formatInputs(inputs) {
     const formattedInputs = Object.keys(inputs)
-        .map((key) => `- \`${key}\`: ${inputMetdata(inputs[key])}\n`)
+        .map((key) => `- \`${key}\`: ${inputMetadata(inputs[key])}\n`)
         .join("\n");
     return formattedInputs;
 }
 function formatOutputs(outputs) {
     const formattedInputs = Object.keys(outputs)
-        .map((key) => `- \`${key}\`: ${inputMetdata(outputs[key])}\n`)
+        .map((key) => `- \`${key}\`: ${inputMetadata(outputs[key])}\n`)
         .join("\n");
     return formattedInputs;
 }
 function formatWorkflowInputs(inputs) {
     return Object.keys(inputs)
-        .map((key) => `"${key}": "", // ${inputMetdata(inputs[key])}`)
+        .map((key) => `"${key}": "", // ${inputMetadata(inputs[key])}`)
         .join("\n    ");
 }
-function inputMetdata(input) {
-    return `${showRequired(input.required)}${input.description}${showDefault(input.default)}${showDeprecation(input.deprecationMessage)}`;
+function inputMetadata(input) {
+    return `${showRequired(input.required)}${input.description}${showDefault(input.default)}${showOptions(input.options)}${showDeprecation(input.deprecationMessage)}`;
 }
 function showRequired(value) {
     return !value ? "" : "Required. ";
@@ -26775,6 +26775,11 @@ function showDefault(value) {
 }
 function showDeprecation(value) {
     return !value ? "" : ` Deprecation warning: \`${value}\``;
+}
+function showOptions(value) {
+    return !value
+        ? ""
+        : ` Options: ${value.map((option) => `\`${option}\``).join(", ")}.`;
 }
 
 ;// CONCATENATED MODULE: ./src/build-docs.ts
