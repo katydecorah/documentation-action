@@ -164,6 +164,16 @@ describe("buildDocs", () => {
             notes:
               description: Notes about the book.
               type: string
+            book-status:
+              description: What is the status of the book? Required.
+              required: true
+              type: choice
+              default: "want to read"
+              options:
+                - "want to read"
+                - "started"
+                - "finished"
+                - "abandoned"
 
       jobs:
         document_action:
@@ -203,6 +213,7 @@ describe("buildDocs", () => {
         "inputs": {
           "bookIsbn": "", // Required. The book's ISBN.
           "notes": "", // Notes about the book.
+          "book-status": "", // Required. What is the status of the book? Required. Default: \`want to read\`. Options: \`want to read\`, \`started\`, \`finished\`, \`abandoned\`.
         }
       }
       \`\`\`
