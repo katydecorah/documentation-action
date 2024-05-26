@@ -77,6 +77,7 @@ export type Input = {
   type?: string;
   default?: string;
   deprecationMessage?: string;
+  options?: string[];
 };
 
 export type Inputs = {

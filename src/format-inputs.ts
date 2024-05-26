@@ -3,28 +3,28 @@ import { Input, Inputs } from "./get-metadata";
 
 export function formatInputs(inputs: ActionConfig["inputs"]): string {
   const formattedInputs = Object.keys(inputs)
-    .map((key) => `- \`${key}\`: ${inputMetdata(inputs[key])}\n`)
+    .map((key) => `- \`${key}\`: ${inputMetadata(inputs[key])}\n`)
     .join("\n");
   return formattedInputs;
 }
 
 export function formatOutputs(outputs: ActionConfig["outputs"]): string {
   const formattedInputs = Object.keys(outputs)
-    .map((key) => `- \`${key}\`: ${inputMetdata(outputs[key])}\n`)
+    .map((key) => `- \`${key}\`: ${inputMetadata(outputs[key])}\n`)
     .join("\n");
   return formattedInputs;
 }
 
 export function formatWorkflowInputs(inputs: Inputs): string {
   return Object.keys(inputs)
-    .map((key) => `"${key}": "", // ${inputMetdata(inputs[key])}`)
+    .map((key) => `"${key}": "", // ${inputMetadata(inputs[key])}`)
     .join("\n    ");
 }
 
-function inputMetdata(input: Input): string {
+function inputMetadata(input: Input): string {
   return `${showRequired(input.required)}${input.description}${showDefault(
     input.default
-  )}${showDeprecation(input.deprecationMessage)}`;
+  )}${showOptions(input.options)}${showDeprecation(input.deprecationMessage)}`;
 }
 
 function showRequired(value: boolean | undefined): string {
@@ -37,4 +37,10 @@ function showDefault(value: string | undefined): string {
 
 function showDeprecation(value: string | undefined): string {
   return !value ? "" : ` Deprecation warning: \`${value}\``;
+}
+
+function showOptions(value: string[] | undefined): string {
+  return !value
+    ? ""
+    : ` Options: ${value.map((option) => `\`${option}\``).join(", ")}.`;
 }
