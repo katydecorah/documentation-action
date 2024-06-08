@@ -55,7 +55,7 @@ describe("buildDocs", () => {
 
       jobs:
         document_action:
-          runs-on: macOS-latest
+          runs-on: ubuntu-latest
           name: Write documentation
           steps:
             - name: Checkout
@@ -118,7 +118,7 @@ describe("buildDocs", () => {
 
       jobs:
         document_action:
-          runs-on: macOS-latest
+          runs-on: ubuntu-latest
           name: Write documentation
           steps:
             - name: Checkout
@@ -177,7 +177,7 @@ describe("buildDocs", () => {
 
       jobs:
         document_action:
-          runs-on: macOS-latest
+          runs-on: ubuntu-latest
           name: Write documentation
           steps:
             - name: Checkout
@@ -251,7 +251,7 @@ test("trimExampleWorkflow", () => {
 
     jobs:
       document_action:
-        runs-on: macOS-latest
+        runs-on: ubuntu-latest
         name: Write documentation
         steps:
           - name: Checkout

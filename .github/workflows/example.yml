@@ -14,7 +14,7 @@ on:
 
 jobs:
   document_action:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     name: Write documentation
     steps:
       - name: Checkout
