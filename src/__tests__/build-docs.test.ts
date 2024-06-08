@@ -47,6 +47,8 @@ describe("buildDocs", () => {
       on:
         workflow_dispatch:
         push:
+          # The following paths are used to trigger the workflow
+          # as any changes to them will likely update the documentation
           paths:
             - ".github/workflows/example.yml"
             - "action.yml"
@@ -55,7 +57,7 @@ describe("buildDocs", () => {
 
       jobs:
         document_action:
-          runs-on: macOS-latest
+          runs-on: ubuntu-latest
           name: Write documentation
           steps:
             - name: Checkout
@@ -110,6 +112,8 @@ describe("buildDocs", () => {
       on:
         workflow_dispatch:
         push:
+          # The following paths are used to trigger the workflow
+          # as any changes to them will likely update the documentation
           paths:
             - ".github/workflows/example.yml"
             - "action.yml"
@@ -118,7 +122,7 @@ describe("buildDocs", () => {
 
       jobs:
         document_action:
-          runs-on: macOS-latest
+          runs-on: ubuntu-latest
           name: Write documentation
           steps:
             - name: Checkout
@@ -177,7 +181,7 @@ describe("buildDocs", () => {
 
       jobs:
         document_action:
-          runs-on: macOS-latest
+          runs-on: ubuntu-latest
           name: Write documentation
           steps:
             - name: Checkout
@@ -243,6 +247,8 @@ test("trimExampleWorkflow", () => {
     on:
       workflow_dispatch:
       push:
+        # The following paths are used to trigger the workflow
+        # as any changes to them will likely update the documentation
         paths:
           - ".github/workflows/example.yml"
           - "action.yml"
@@ -251,7 +257,7 @@ test("trimExampleWorkflow", () => {
 
     jobs:
       document_action:
-        runs-on: macOS-latest
+        runs-on: ubuntu-latest
         name: Write documentation
         steps:
           - name: Checkout

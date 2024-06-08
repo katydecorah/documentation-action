@@ -5,9 +5,18 @@ name: Document GitHub action (advanced)
 permissions:
   contents: write
 
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/example-advanced.yml"
+      - "action.yml"
+      - "package.json"
+      - "README.md"
+
 jobs:
   document_action:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     name: Write documentation
     steps:
       - name: Checkout

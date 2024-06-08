@@ -22,6 +22,8 @@ permissions:
 on:
   workflow_dispatch:
   push:
+    # The following paths are used to trigger the workflow
+    # as any changes to them will likely update the documentation
     paths:
       - ".github/workflows/example.yml"
       - "action.yml"
@@ -30,7 +32,7 @@ on:
 
 jobs:
   document_action:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     name: Write documentation
     steps:
       - name: Checkout
@@ -61,9 +63,18 @@ name: Document GitHub action (advanced)
 permissions:
   contents: write
 
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/example-advanced.yml"
+      - "action.yml"
+      - "package.json"
+      - "README.md"
+
 jobs:
   document_action:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     name: Write documentation
     steps:
       - name: Checkout
@@ -91,12 +102,21 @@ name: Document GitHub action (new feature)
 # This workflow file is the same as example.yml
 # It's a proof of concept that you provide additional workflow files and they will appear in the README.
 
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/example-new-feature.yml"
+      - "action.yml"
+      - "package.json"
+      - "README.md"
+
 permissions:
   contents: write
 
 jobs:
   document_action:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     name: Write documentation
     steps:
       - name: Checkout
