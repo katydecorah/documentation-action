@@ -144,7 +144,6 @@ jobs:
 
 - `documentation-file`: The file where the action will write and update documentation for the action. Default: `README.md`.
 
-
 ## Action outputs
 
 - `update`: If true, the action updated the documentation file.
