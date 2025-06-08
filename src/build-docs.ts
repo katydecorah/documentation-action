@@ -78,7 +78,6 @@ ${formatInputs(action.inputs)}`;
 function documentActionOutputs(action: ActionConfig): string | undefined {
   if (!action.outputs) return;
   return `
-
 ## Action outputs
 
 ${formatOutputs(action.outputs)}`;
