@@ -36,7 +36,7 @@ jobs:
     name: Write documentation
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Documentation action
         id: documentation
         uses: katydecorah/documentation-action@v1.5.0
@@ -78,7 +78,7 @@ jobs:
     name: Write documentation
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Documentation action
         id: documentation
         uses: katydecorah/documentation-action@v1.5.0
@@ -120,7 +120,7 @@ jobs:
     name: Write documentation
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Documentation action
         id: documentation
         uses: katydecorah/documentation-action@v1.5.0
